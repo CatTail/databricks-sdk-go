@@ -68,6 +68,8 @@ paths:
             $ref: "#/definitions/ClustersGetResponse"
   /clusters/edit:
     post:
+      tags:
+        - "cluster"
       description: "Edits the configuration of a cluster to match the provided attributes and size."
       operationId: "editCluster"
       parameters:
@@ -79,22 +81,26 @@ paths:
       responses:
         200:
           description:
-  /clusters/delete:
+  /clusters/permanent-delete:
     post:
+      tags:
+        - "cluster"
       description: "Terminates a Spark cluster given its id. The cluster is removed asynchronously. Once the termination has completed, the cluster will be in a TERMINATED state. If the cluster is already in a TERMINATING or TERMINATED state, nothing will happen."
-      operationId: "deleteCluster"
+      operationId: "permanentDeleteCluster"
       parameters:
         - in: "body"
           name: "body"
           required: true
           schema:
-            $ref: "#/definitions/ClustersDeleteRequest"
+            $ref: "#/definitions/ClustersPermanentDeleteRequest"
       responses:
         200:
           description:
   ### Jobs ###
   /jobs/create:
     post:
+      tags:
+        - "job"
       description: "Creates a new job with the provided settings."
       operationId: "createJob"
       parameters:
@@ -110,6 +116,8 @@ paths:
             $ref: "#/definitions/JobsCreateResponse"
   /jobs/get:
     get:
+      tags:
+        - "job"
       description: "Retrieves information about a single job."
       operationId: "getJob"
       parameters:
@@ -124,6 +132,8 @@ paths:
             $ref: "#/definitions/JobsGetResponse"
   /jobs/reset:
     post:
+      tags:
+        - "job"
       description: "Overwrites the settings of a job with the provided settings."
       operationId: "resetJob"
       parameters:
@@ -137,6 +147,8 @@ paths:
           description:
   /jobs/delete:
     post:
+      tags:
+        - "job"
       description: "Deletes the job and sends an email to the addresses specified in JobSettings.email_notifications."
       operationId: "deleteJob"
       parameters:
@@ -151,6 +163,8 @@ paths:
   ### Libraries ###
   /libraries/install:
     post:
+      tags:
+        - "library"
       description: "Install libraries on a cluster. The installation is asynchronous - it happens in the background after the completion of this request."
       operationId: "installLibrary"
       parameters:
@@ -162,11 +176,12 @@ paths:
       responses:
         200:
           description:
-
   /libraries/uninstall:
     post:
-      description:
-      operationId:
+      tags:
+        - "library"
+      description: "Set libraries to be uninstalled on a cluster. The libraries aren’t uninstalled until the cluster is restarted. Uninstalling libraries that are not installed on the cluster has no impact but is not an error."
+      operationId: "uninstallLibrary"
       parameters:
         - in: "body"
           name: "body"
@@ -254,9 +269,9 @@ definitions:
     type: string
     default: NOTEBOOK
     enum:
-      - NOTEBOOK
-      - DIRECTORY
-      - LIBRARY
+      - NOTEBOOK_OBJECT_TYPE
+      - DIRECTORY_OBJECT_TYPE
+      - LIBRARY_OBJECT_TYPE
   WorkspaceExportFormat:
     type: string
     default: SOURCE
@@ -578,14 +593,14 @@ definitions:
   ClustersClusterState:
     type: string
     enum:
-      - PENDING
-      - RUNNING
-      - RESTARTING
-      - RESIZING
-      - TERMINATING
-      - TERMINATED
-      - ERROR
-      - UNKNOWN
+      - PENDING_CLUSTER_STATE
+      - RUNNING_CLUSTER_STATE
+      - RESTARTING_CLUSTER_STATE
+      - RESIZING_CLUSTER_STATE
+      - TERMINATING_CLUSTER_STATE
+      - TERMINATED_CLUSTER_STATE
+      - ERROR_CLUSTER_STATE
+      - UNKNOWN_CLUSTER_STATE
   ClustersLogSyncStatus:
     properties:
       last_attempted:
@@ -877,36 +892,36 @@ definitions:
   RunLifeCycleState:
     type: string
     enum:
-      - PENDING
-      - RUNNING
-      - TERMINATING
-      - TERMINATED
-      - SKIPPED
-      - INTERNAL_ERROR
+      - PENDING_RUN_STATUS
+      - RUNNING_RUN_STATUS
+      - TERMINATING_RUN_STATUS
+      - TERMINATED_RUN_STATUS
+      - SKIPPED_RUN_STATUS
+      - INTERNAL_ERROR_RUN_STATUS
   RunResultState:
     type: string
     enum:
-      - SUCCESS
-      - FAILED
-      - TIMEDOUT
-      - CANCELED
+      - SUCCESS_RESULT_STATE
+      - FAILED_RESULT_STATE
+      - TIMEDOUT_RESULT_STATE
+      - CANCELED_RESULT_STATE
   TriggerType:
     type: string
     enum:
-      - PERIODIC
-      - ONE_TIME
-      - RETRY
+      - PERIODIC_TRIGGER_TYPE
+      - ONE_TIME_TRIGGER_TYPE
+      - RETRY_TRIGGER_TYPE
   ViewType:
     type: string
     enum:
-      - NOTEBOOK
-      - DASHBOARD
+      - NOTEBOOK_VIEW_TYPE
+      - DASHBOARD_VIEW_TYPE
   ViewsToExport:
     type: string
     enum:
-      - CODE
-      - DASHBOARDS
-      - ALL
+      - CODE_EXPORT
+      - DASHBOARDS_EXPORT
+      - ALL_EXPORT
   ### Libraries ###
   # Requests and responses
   LibrariesInstallRequest:
@@ -989,12 +1004,12 @@ definitions:
   LibraryInstallStatus:
     type: string
     enum:
-      - PENDING
-      - RESOLVING
-      - INSTALLING
-      - INSTALLED
-      - FAILED
-      - UNINSTALL_ON_RESTART
+      - PENDING_LIBRARY_STATUS
+      - RESOLVING_LIBRARY_STATUS
+      - INSTALLING_LIBRARY_STATUS
+      - INSTALLED_LIBRARY_STATUS
+      - FAILED_LIBRARY_STATUS
+      - UNINSTALL_ON_RESTART_LIBRARY_STATUS
   ### Errors ###
   ErrorResponse:
     required:
