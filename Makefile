@@ -1,13 +1,16 @@
-swagger-codegen-cli.jar:
-	wget http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/2.3.1/swagger-codegen-cli-2.3.1.jar -O swagger-codegen-cli.jar
+build: bin/swagger-codegen-cli.jar clean
+	java -jar bin/swagger-codegen-cli.jar generate -i swagger.yaml -l go -c config.json -o databricks
+
+bin/swagger-codegen-cli.jar:
+	wget http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/2.3.1/swagger-codegen-cli-2.3.1.jar -O bin/swagger-codegen-cli.jar
 
 build-examples:
-	go build -o ./examples/cluster/main ./examples/cluster
+	go build -o ./bin/example ./example.go
 
-build: swagger-codegen-cli.jar
-	java -jar swagger-codegen-cli.jar generate -i swagger.yaml -l go -c config.json -o client
+run-examples: build-examples
+	./bin/example
 
 clean:
-	rm -rf ./client
+	rm -rf ./databricks
 
 .PHONY: build clean

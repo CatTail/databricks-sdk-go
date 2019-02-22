@@ -2,7 +2,8 @@ package examples
 
 import (
 	"encoding/json"
-	sw "github.com/cattail/databricks-sdk-go/client"
+	"fmt"
+	"github.com/cattail/databricks-sdk-go/databricks"
 	"golang.org/x/net/context"
 	"io/ioutil"
 	"log"
@@ -11,15 +12,17 @@ import (
 )
 
 var secrets = LoadSecrets()
+var client = GetClient()
+var auth = GetAuth()
 
-func GetClient() *sw.APIClient {
-	cfg := sw.NewConfiguration()
+func GetClient() *databricks.APIClient {
+	cfg := databricks.NewConfiguration()
 	cfg.BasePath = secrets.Domain + "/api/2.0"
-	return sw.NewAPIClient(cfg)
+	return databricks.NewAPIClient(cfg)
 }
 
 func GetAuth() context.Context {
-	return context.WithValue(context.Background(), sw.ContextAPIKey, sw.APIKey{
+	return context.WithValue(context.Background(), databricks.ContextAPIKey, databricks.APIKey{
 		Key: secrets.Token,
 		Prefix: "Bearer",
 	})
@@ -36,7 +39,7 @@ func LoadSecrets() *Secrets {
 		log.Fatal(err)
 	}
 
-	content, err := ioutil.ReadFile(filepath.Join(dir, "../secrets.json"))
+	content, err := ioutil.ReadFile(filepath.Join(dir, "../examples/secrets.json"))
 	if err != nil {
 		panic(err)
 	}
@@ -48,4 +51,13 @@ func LoadSecrets() *Secrets {
 	}
 
 	return &sc
+}
+
+func JsonPrint(response interface{}) {
+	result, err := json.Marshal(response)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println(string(result))
 }
