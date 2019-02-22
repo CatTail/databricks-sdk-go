@@ -1,0 +1,569 @@
+---
+swagger: "2.0"
+info:
+  description: "The Databricks REST API 2.0 supports of a variety of services."
+  version: "2.0"
+  title: "Databricks REST API"
+consumes:
+  - application/json
+produces:
+  - application/json
+host: "petstore.swagger.io:80"
+basePath: "/api/2.0"
+tags:
+- name: "cluster"
+  description: "The Clusters API allows you to create, start, edit, list, terminate, and delete clusters via the API."
+  externalDocs:
+    url: "https://docs.databricks.com/api/latest/clusters.html"
+- name: "job"
+  description: "he Jobs API allows you to create, edit, and delete jobs via the API."
+  externalDocs:
+    url: "https://docs.databricks.com/api/latest/jobs.html"
+- name: "library"
+  description: "The Libraries API allows you to install and uninstall libraries and get the status of libraries on a cluster via the API."
+  externalDocs:
+    url: "https://docs.databricks.com/api/latest/libraries.html"
+- name: "workspace"
+  description: "The Workspace API allows you to list/import/export/delete notebooks/folders via the API."
+  externalDocs:
+    url: "https://docs.databricks.com/api/latest/workspace.html"
+schemes:
+- "https"
+security:
+  - Bearer: []
+paths:
+  /clusters/get:
+    get:
+      tags:
+        - "cluster"
+      summary: "Retrieves the information for a cluster given its identifier. Clusters can be described while they are running, or up to 30 days after they are terminated."
+      operationId: "getCluster"
+      parameters:
+        - in: "query"
+          name: "cluster_id"
+          description: "The cluster about which to retrieve information."
+          required: true
+          type: "string"
+      responses:
+        200:
+          description:
+          schema:
+            $ref: "#/definitions/ClustersGetResponse"
+
+definitions:
+  ### Workspace ###
+  # Requests and responses
+  WorkspaceDeleteRequest:
+    required:
+      - path
+    properties:
+      path:
+        type: string
+      recursive:
+        type: boolean
+  WorkspaceExportRequest:
+    required:
+      - path
+    properties:
+      path:
+        type: string
+      format:
+        $ref: '#/definitions/WorkspaceExportFormat'
+      direct_download:
+        type: boolean
+  WorkspaceExportResponse:
+    properties:
+      content:
+        type: string
+        format: byte
+  WorkspaceGetStatusRequest:
+    required:
+      - path
+    properties:
+      path:
+        type: string
+  WorkspaceGetStatusResponse:
+    properties:
+      object_type:
+        $ref: '#/definitions/WorkspaceObjectType'
+      path:
+        type: string
+      language:
+        $ref: '#/definitions/WorkspaceLanguage'
+  WorkspaceImportRequest:
+    required:
+      - path
+    properties:
+      path:
+        type: string
+      format:
+        $ref: '#/definitions/WorkspaceExportFormat'
+      language:
+        $ref: '#/definitions/WorkspaceLanguage'
+      content:
+        type: string
+        format: byte
+      overwrite:
+        type: boolean
+  WorkspaceListRequest:
+    required:
+      - path
+    properties:
+      path:
+        type: string
+  WorkspaceListResponse:
+    properties:
+      objects:
+        type: array
+        items:
+          $ref: '#/definitions/WorkspaceObjectInfo'
+  WorkspaceMkdirsRequest:
+    required:
+      - path
+    properties:
+      path:
+        type: string
+  # Data objects
+  WorkspaceObjectType:
+    type: string
+    default: NOTEBOOK
+    enum:
+      - NOTEBOOK
+      - DIRECTORY
+      - LIBRARY
+  WorkspaceExportFormat:
+    type: string
+    default: SOURCE
+    enum:
+      - SOURCE
+      - HTML
+      - JUPYTER
+      - DBC
+  WorkspaceLanguage:
+    type: string
+    default: SCALA
+    enum:
+      - SCALA
+      - PYTHON
+      - SQL
+      - R
+  WorkspaceObject:
+    required:
+      - path
+      - object_type
+    properties:
+      path:
+        type: string
+      language:
+        $ref: '#/definitions/WorkspaceLanguage'
+      object_type:
+        $ref: '#/definitions/WorkspaceObjectType'
+  WorkspaceObjectInfo:
+    properties:
+      object_type:
+        $ref: '#/definitions/WorkspaceObjectType'
+      path:
+        type: string
+      language:
+        $ref: '#/definitions/WorkspaceLanguage'
+  ### Clusters ###
+  # Requests and responses
+  ClustersCreateRequest:
+    required:
+      - spark_version
+      - node_type_id
+    properties:
+      num_workers:
+        type: integer
+        format: int32
+      autoscale:
+        $ref: '#/definitions/ClustersAutoScale'
+      cluster_name:
+        type: string
+      spark_version:
+        type: string
+      spark_conf:
+        type: object
+        additionalProperties:
+          type: string
+      aws_attributes:
+        $ref: '#/definitions/ClustersAwsAttributes'
+      node_type_id:
+        type: string
+      driver_node_type_id:
+        type: string
+      ssh_public_keys:
+        type: array
+        items:
+          type: string
+      custom_tags:
+        type: object
+        additionalProperties:
+          type: string
+      cluster_log_conf:
+        $ref: '#/definitions/ClustersClusterLogConf'
+      spark_env_vars:
+        type: object
+        additionalProperties:
+          type: string
+      autotermination_minutes:
+        type: integer
+        format: int32
+      enable_elastic_disk:
+        type: boolean
+  ClustersCreateResponse:
+    properties:
+      cluster_id:
+        type: string
+  ClustersEditRequest:
+    required:
+      - cluster_id
+      - spark_version
+      - node_type_id
+    properties:
+      num_workers:
+        type: integer
+        format: int32
+      autoscale:
+        $ref: '#/definitions/ClustersAutoScale'
+      cluster_id:
+        type: string
+      cluster_name:
+        type: string
+      spark_version:
+        type: string
+      spark_conf:
+        type: object
+        additionalProperties:
+          type: string
+      aws_attributes:
+        $ref: '#/definitions/ClustersAwsAttributes'
+      node_type_id:
+        type: string
+      driver_node_type_id:
+        type: string
+      ssh_public_keys:
+        type: array
+        items:
+          type: string
+      custom_tags:
+        type: object
+        additionalProperties:
+          type: string
+      cluster_log_conf:
+        $ref: '#/definitions/ClustersClusterLogConf'
+      spark_env_vars:
+        type: object
+        additionalProperties:
+          type: string
+      autotermination_minutes:
+        type: integer
+        format: int32
+      enable_elastic_disk:
+        type: boolean
+  ClustersStartRequest:
+    required:
+      - cluster_id
+    properties:
+      cluster_id:
+        type: string
+  ClustersRestartRequest:
+    required:
+      - cluster_id
+    properties:
+      cluster_id:
+        type: string
+  ClustersDeleteRequest:
+    required:
+      - cluster_id
+    properties:
+      cluster_id:
+        type: string
+  ClustersPermanentDeleteRequest:
+    required:
+      - cluster_id
+    properties:
+      cluster_id:
+        type: string
+  ClustersGetRequest:
+    required:
+      - cluster_id
+    properties:
+      cluster_id:
+        type: string
+  ClustersGetResponse:
+    allOf:
+      # TODO: this response is slightly different w.r.t. ClusterInfo
+      - $ref: '#/definitions/ClustersClusterInfo'
+  ClustersListResponse:
+    properties:
+      clusters:
+        type: array
+        items:
+          $ref: '#/definitions/ClustersClusterInfo'
+  # Data objects
+  ClustersClusterInfo:
+    properties:
+      num_workers:
+        type: integer
+        format: int32
+      autoscale:
+        $ref: '#/definitions/ClustersAutoScale'
+      cluster_id:
+        type: string
+      creator_user_name:
+        type: string
+      driver:
+        $ref: '#/definitions/ClustersSparkNode'
+      executors:
+        type: array
+        items:
+          $ref: '#/definitions/ClustersSparkNode'
+      spark_context_id:
+        type: integer
+        format: int64
+      jdbc_port:
+        type: integer
+        format: int32
+      cluster_name:
+        type: string
+      spark_version:
+        type: string
+      spark_conf:
+        type: object
+        additionalProperties:
+          type: string
+      aws_attributes:
+        $ref: '#/definitions/ClustersAwsAttributes'
+      node_type_id:
+        type: string
+      driver_node_type_id:
+        type: string
+      ssh_public_keys:
+        type: array
+        items:
+          type: string
+      custom_tags:
+        type: object
+        additionalProperties:
+          type: string
+      cluster_log_conf:
+        $ref: '#/definitions/ClustersClusterLogConf'
+      spark_env_vars:
+        type: object
+        additionalProperties:
+          type: string
+      autotermination_minutes:
+        type: integer
+        format: int32
+      enable_elastic_disk:
+        type: boolean
+      cluster_source:
+        $ref: '#/definitions/ClustersClusterSource'
+      state:
+        $ref: '#/definitions/ClustersClusterState'
+      state_message:
+        type: string
+      start_time:
+        type: integer
+        format: int64
+      terminated_time:
+        type: integer
+        format: int64
+      last_state_loss_time:
+        type: integer
+        format: int64
+      last_activity_time:
+        type: integer
+        format: int64
+      cluster_memory_mb:
+        type: integer
+        format: int64
+      cluster_cores:
+        type: number
+        format: float
+      default_tags:
+        type: object
+        additionalProperties:
+          type: string
+      cluster_log_status:
+        $ref: '#/definitions/ClustersLogSyncStatus'
+      termination_reason:
+        $ref: '#/definitions/ClustersTerminationReason'
+  ClustersAutoScale:
+    properties:
+      min_workers:
+        type: integer
+        format: int32
+      max_workers:
+        type: integer
+        format: int32
+  ClustersAwsAttributes:
+    properties:
+      first_on_demand:
+        type: integer
+        format: int32
+      availability:
+        $ref: '#/definitions/ClustersAwsAvailability'
+      zone_id:
+        type: string
+      instance_profile_arn:
+        type: string
+      spot_bid_price_percent:
+        type: integer
+        format: int32
+      ebs_volume_type:
+        $ref: '#/definitions/ClustersEbsVolumeType'
+      ebs_volume_count:
+        type: integer
+        format: int32
+      ebs_volume_size:
+        type: integer
+        format: int32
+  ClustersSparkNode:
+    properties:
+      private_ip:
+        type: string
+      public_dns:
+        type: string
+      node_id:
+        type: string
+      instance_id:
+        type: string
+      start_timestamp:
+        type: integer
+        format: int64
+      host_private_ip:
+        type: string
+  ClustersClusterLogConf:
+    properties:
+      dbfs:
+        $ref: '#/definitions/ClustersDbfsStorageInfo'
+  ClustersDbfsStorageInfo:
+    properties:
+      destination:
+        type: string
+  ClustersClusterSource:
+    type: string
+    enum:
+      - UI
+      - JOB
+      - API
+  ClustersClusterState:
+    type: string
+    enum:
+      - PENDING
+      - RUNNING
+      - RESTARTING
+      - RESIZING
+      - TERMINATING
+      - TERMINATED
+      - ERROR
+      - UNKNOWN
+  ClustersLogSyncStatus:
+    properties:
+      last_attempted:
+        type: integer
+        format: int64
+      last_exception:
+        type: string
+  ClustersTerminationReason:
+    properties:
+      code:
+        $ref: '#/definitions/ClustersTerminationCode'
+      parameters:
+        type: object
+        properties:
+          username:
+            type: string
+          databricks_error_message:
+            type: string
+          inactivity_duration_min:
+            type: string
+          instance_id:
+            type: string
+          azure_error_code:
+            type: string
+          azure_error_message:
+            type: string
+        additionalProperties:
+          type: string
+  ClustersTerminationCode:
+    type: string
+    enum:
+      - USER_REQUEST
+      - JOB_FINISHED
+      - INACTIVITY
+      - CLOUD_PROVIDER_SHUTDOWN
+      - COMMUNICATION_LOST
+      - CLOUD_PROVIDER_LAUNCH_FAILURE
+      - SPARK_STARTUP_FAILURE
+      - INVALID_ARGUMENT
+      - UNEXPECTED_LAUNCH_FAILURE
+      - INTERNAL_ERROR
+      - INSTANCE_UNREACHABLE
+      - REQUEST_REJECTED
+  ClustersAwsAvailability:
+    type: string
+    enum:
+      - SPOT
+      - ON_DEMAND
+      - SPOT_WITH_FALLBACK
+  ClustersEbsVolumeType:
+    type: string
+    enum:
+      - GENERAL_PURPOSE_SSD
+      - THROUGHPUT_OPTIMIZED_HDD
+  ### Jobs ###
+  JobSpec:
+    properties:
+      name:
+        type: string
+      new_cluster:
+        $ref: '#/definitions/NewCluster'
+      notebook_task:
+        $ref: '#/definitions/NotebookTask'
+  NewCluster:
+    required:
+      - spark_version
+      - node_type_id
+    properties:
+      num_workers:
+        type: integer
+        format: int32
+      cluster_name:
+        type: string
+      spark_version:
+        type: string
+      node_type_id:
+        type: string
+  NotebookTask:
+    required:
+      - notebook_path
+    properties:
+      notebook_path:
+        type: string
+      base_parameters:
+        type: array
+        items:
+          type: object
+          additionalProperties:
+            type: string
+  ### Errors ###
+  ErrorResponse:
+    required:
+      - error_code
+      - message
+    properties:
+      error_code:
+        type: string
+      message:
+        type: string
+securityDefinitions:
+  Bearer:
+    type: "apiKey"
+    name: "Authorization"
+    in: "header"
+externalDocs:
+  description: "The Databricks REST API 2.0 supports of a variety of services."
+  url: "https://docs.databricks.com/api/latest/index.html"
