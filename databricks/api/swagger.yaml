@@ -1,0 +1,1397 @@
+---
+swagger: "2.0"
+info:
+  description: "The Databricks REST API 2.0 supports of a variety of services."
+  version: "2.0"
+  title: "Databricks REST API"
+host: "petstore.swagger.io:80"
+basePath: "/api/2.0"
+tags:
+- name: "cluster"
+  description: "The Clusters API allows you to create, start, edit, list, terminate,\
+    \ and delete clusters via the API."
+  externalDocs:
+    url: "https://docs.databricks.com/api/latest/clusters.html"
+- name: "job"
+  description: "he Jobs API allows you to create, edit, and delete jobs via the API."
+  externalDocs:
+    url: "https://docs.databricks.com/api/latest/jobs.html"
+- name: "library"
+  description: "The Libraries API allows you to install and uninstall libraries and\
+    \ get the status of libraries on a cluster via the API."
+  externalDocs:
+    url: "https://docs.databricks.com/api/latest/libraries.html"
+- name: "workspace"
+  description: "The Workspace API allows you to list/import/export/delete notebooks/folders\
+    \ via the API."
+  externalDocs:
+    url: "https://docs.databricks.com/api/latest/workspace.html"
+schemes:
+- "https"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+security:
+- Bearer: []
+paths:
+  /clusters/create:
+    post:
+      tags:
+      - "cluster"
+      description: "Creates a new Spark cluster. This method acquires new instances\
+        \ from the cloud provider if necessary. This method is asynchronous; the returned\
+        \ cluster_id can be used to poll the cluster state. When this method returns,\
+        \ the cluster is in a PENDING state. The cluster is usable once it enters\
+        \ a RUNNING state."
+      operationId: "createCluster"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/ClustersCreateRequest"
+        x-exportParamName: "Body"
+      responses:
+        200:
+          description: "null"
+          schema:
+            $ref: "#/definitions/ClustersCreateResponse"
+  /clusters/get:
+    get:
+      tags:
+      - "cluster"
+      description: "Retrieves the information for a cluster given its identifier.\
+        \ Clusters can be described while they are running, or up to 30 days after\
+        \ they are terminated."
+      operationId: "getCluster"
+      parameters:
+      - name: "cluster_id"
+        in: "query"
+        required: true
+        type: "string"
+        x-exportParamName: "ClusterId"
+      responses:
+        200:
+          description: "null"
+          schema:
+            $ref: "#/definitions/ClustersGetResponse"
+  /clusters/edit:
+    post:
+      tags:
+      - "cluster"
+      description: "Edits the configuration of a cluster to match the provided attributes\
+        \ and size."
+      operationId: "editCluster"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/ClustersEditRequest"
+        x-exportParamName: "Body"
+      responses:
+        200:
+          description: "null"
+  /clusters/permanent-delete:
+    post:
+      tags:
+      - "cluster"
+      description: "Terminates a Spark cluster given its id. The cluster is removed\
+        \ asynchronously. Once the termination has completed, the cluster will be\
+        \ in a TERMINATED state. If the cluster is already in a TERMINATING or TERMINATED\
+        \ state, nothing will happen."
+      operationId: "permanentDeleteCluster"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/ClustersPermanentDeleteRequest"
+        x-exportParamName: "Body"
+      responses:
+        200:
+          description: "null"
+  /jobs/create:
+    post:
+      tags:
+      - "job"
+      description: "Creates a new job with the provided settings."
+      operationId: "createJob"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/JobsCreateRequest"
+        x-exportParamName: "Body"
+      responses:
+        200:
+          description: "null"
+          schema:
+            $ref: "#/definitions/JobsCreateResponse"
+  /jobs/get:
+    get:
+      tags:
+      - "job"
+      description: "Retrieves information about a single job."
+      operationId: "getJob"
+      parameters:
+      - name: "job_id"
+        in: "query"
+        required: true
+        type: "integer"
+        x-exportParamName: "JobId"
+      responses:
+        200:
+          description: "null"
+          schema:
+            $ref: "#/definitions/JobsGetResponse"
+  /jobs/reset:
+    post:
+      tags:
+      - "job"
+      description: "Overwrites the settings of a job with the provided settings."
+      operationId: "resetJob"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/JobsResetRequest"
+        x-exportParamName: "Body"
+      responses:
+        200:
+          description: "null"
+  /jobs/delete:
+    post:
+      tags:
+      - "job"
+      description: "Deletes the job and sends an email to the addresses specified\
+        \ in JobSettings.email_notifications."
+      operationId: "deleteJob"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/JobsDeleteRequest"
+        x-exportParamName: "Body"
+      responses:
+        200:
+          description: "null"
+  /libraries/install:
+    post:
+      tags:
+      - "library"
+      description: "Install libraries on a cluster. The installation is asynchronous\
+        \ - it happens in the background after the completion of this request."
+      operationId: "installLibrary"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/LibrariesInstallRequest"
+        x-exportParamName: "Body"
+      responses:
+        200:
+          description: "null"
+  /libraries/uninstall:
+    post:
+      tags:
+      - "library"
+      description: "Set libraries to be uninstalled on a cluster. The libraries aren’\
+        t uninstalled until the cluster is restarted. Uninstalling libraries that\
+        \ are not installed on the cluster has no impact but is not an error."
+      operationId: "uninstallLibrary"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/LibrariesUninstallRequest"
+        x-exportParamName: "Body"
+      responses:
+        200:
+          description: "null"
+securityDefinitions:
+  Bearer:
+    type: "apiKey"
+    name: "Authorization"
+    in: "header"
+definitions:
+  WorkspaceDeleteRequest:
+    required:
+    - "path"
+    properties:
+      path:
+        type: "string"
+      recursive:
+        type: "boolean"
+  WorkspaceExportRequest:
+    required:
+    - "path"
+    properties:
+      path:
+        type: "string"
+      format:
+        $ref: "#/definitions/WorkspaceExportFormat"
+      direct_download:
+        type: "boolean"
+  WorkspaceExportResponse:
+    properties:
+      content:
+        type: "string"
+        format: "byte"
+        pattern: "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
+  WorkspaceGetStatusRequest:
+    required:
+    - "path"
+    properties:
+      path:
+        type: "string"
+  WorkspaceGetStatusResponse:
+    properties:
+      object_type:
+        $ref: "#/definitions/WorkspaceObjectType"
+      path:
+        type: "string"
+      language:
+        $ref: "#/definitions/WorkspaceLanguage"
+  WorkspaceImportRequest:
+    required:
+    - "path"
+    properties:
+      path:
+        type: "string"
+      format:
+        $ref: "#/definitions/WorkspaceExportFormat"
+      language:
+        $ref: "#/definitions/WorkspaceLanguage"
+      content:
+        type: "string"
+        format: "byte"
+        pattern: "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
+      overwrite:
+        type: "boolean"
+  WorkspaceListRequest:
+    required:
+    - "path"
+    properties:
+      path:
+        type: "string"
+  WorkspaceListResponse:
+    properties:
+      objects:
+        type: "array"
+        items:
+          $ref: "#/definitions/WorkspaceObjectInfo"
+  WorkspaceMkdirsRequest:
+    required:
+    - "path"
+    properties:
+      path:
+        type: "string"
+  WorkspaceObjectType:
+    type: "string"
+    enum:
+    - "NOTEBOOK_OBJECT_TYPE"
+    - "DIRECTORY_OBJECT_TYPE"
+    - "LIBRARY_OBJECT_TYPE"
+    default: "NOTEBOOK"
+  WorkspaceExportFormat:
+    type: "string"
+    enum:
+    - "SOURCE"
+    - "HTML"
+    - "JUPYTER"
+    - "DBC"
+    default: "SOURCE"
+  WorkspaceLanguage:
+    type: "string"
+    enum:
+    - "SCALA"
+    - "PYTHON"
+    - "SQL"
+    - "R"
+    default: "SCALA"
+  WorkspaceObject:
+    required:
+    - "object_type"
+    - "path"
+    properties:
+      path:
+        type: "string"
+      language:
+        $ref: "#/definitions/WorkspaceLanguage"
+      object_type:
+        $ref: "#/definitions/WorkspaceObjectType"
+  WorkspaceObjectInfo:
+    properties:
+      object_type:
+        $ref: "#/definitions/WorkspaceObjectType"
+      path:
+        type: "string"
+      language:
+        $ref: "#/definitions/WorkspaceLanguage"
+  ClustersCreateRequest:
+    required:
+    - "node_type_id"
+    - "spark_version"
+    properties:
+      num_workers:
+        type: "integer"
+        format: "int32"
+      autoscale:
+        $ref: "#/definitions/ClustersAutoScale"
+      cluster_name:
+        type: "string"
+      spark_version:
+        type: "string"
+      spark_conf:
+        type: "object"
+        additionalProperties:
+          type: "string"
+      aws_attributes:
+        $ref: "#/definitions/ClustersAwsAttributes"
+      node_type_id:
+        type: "string"
+      driver_node_type_id:
+        type: "string"
+      ssh_public_keys:
+        type: "array"
+        items:
+          type: "string"
+      custom_tags:
+        type: "object"
+        additionalProperties:
+          type: "string"
+      cluster_log_conf:
+        $ref: "#/definitions/ClustersClusterLogConf"
+      spark_env_vars:
+        type: "object"
+        additionalProperties:
+          type: "string"
+      autotermination_minutes:
+        type: "integer"
+        format: "int32"
+      enable_elastic_disk:
+        type: "boolean"
+    example:
+      spark_conf:
+        key: "spark_conf"
+      cluster_log_conf:
+        dbfs:
+          destination: "destination"
+      cluster_name: "cluster_name"
+      enable_elastic_disk: true
+      spark_env_vars:
+        key: "spark_env_vars"
+      node_type_id: "node_type_id"
+      ssh_public_keys:
+      - "ssh_public_keys"
+      - "ssh_public_keys"
+      custom_tags:
+        key: "custom_tags"
+      num_workers: 0
+      autoscale:
+        max_workers: 1
+        min_workers: 6
+      aws_attributes:
+        ebs_volume_count: 2
+        zone_id: "zone_id"
+        ebs_volume_size: 7
+        spot_bid_price_percent: 5
+        availability: {}
+        ebs_volume_type: {}
+        first_on_demand: 5
+        instance_profile_arn: "instance_profile_arn"
+      spark_version: "spark_version"
+      autotermination_minutes: 9
+      driver_node_type_id: "driver_node_type_id"
+  ClustersCreateResponse:
+    properties:
+      cluster_id:
+        type: "string"
+    example:
+      cluster_id: "cluster_id"
+  ClustersEditRequest:
+    required:
+    - "cluster_id"
+    - "node_type_id"
+    - "spark_version"
+    properties:
+      num_workers:
+        type: "integer"
+        format: "int32"
+      autoscale:
+        $ref: "#/definitions/ClustersAutoScale"
+      cluster_id:
+        type: "string"
+      cluster_name:
+        type: "string"
+      spark_version:
+        type: "string"
+      spark_conf:
+        type: "object"
+        additionalProperties:
+          type: "string"
+      aws_attributes:
+        $ref: "#/definitions/ClustersAwsAttributes"
+      node_type_id:
+        type: "string"
+      driver_node_type_id:
+        type: "string"
+      ssh_public_keys:
+        type: "array"
+        items:
+          type: "string"
+      custom_tags:
+        type: "object"
+        additionalProperties:
+          type: "string"
+      cluster_log_conf:
+        $ref: "#/definitions/ClustersClusterLogConf"
+      spark_env_vars:
+        type: "object"
+        additionalProperties:
+          type: "string"
+      autotermination_minutes:
+        type: "integer"
+        format: "int32"
+      enable_elastic_disk:
+        type: "boolean"
+    example:
+      spark_conf:
+        key: "spark_conf"
+      cluster_log_conf:
+        dbfs:
+          destination: "destination"
+      cluster_name: "cluster_name"
+      enable_elastic_disk: true
+      spark_env_vars:
+        key: "spark_env_vars"
+      node_type_id: "node_type_id"
+      ssh_public_keys:
+      - "ssh_public_keys"
+      - "ssh_public_keys"
+      custom_tags:
+        key: "custom_tags"
+      num_workers: 0
+      autoscale:
+        max_workers: 1
+        min_workers: 6
+      cluster_id: "cluster_id"
+      aws_attributes:
+        ebs_volume_count: 2
+        zone_id: "zone_id"
+        ebs_volume_size: 7
+        spot_bid_price_percent: 5
+        availability: {}
+        ebs_volume_type: {}
+        first_on_demand: 5
+        instance_profile_arn: "instance_profile_arn"
+      spark_version: "spark_version"
+      autotermination_minutes: 6
+      driver_node_type_id: "driver_node_type_id"
+  ClustersStartRequest:
+    required:
+    - "cluster_id"
+    properties:
+      cluster_id:
+        type: "string"
+  ClustersRestartRequest:
+    required:
+    - "cluster_id"
+    properties:
+      cluster_id:
+        type: "string"
+  ClustersDeleteRequest:
+    required:
+    - "cluster_id"
+    properties:
+      cluster_id:
+        type: "string"
+  ClustersPermanentDeleteRequest:
+    required:
+    - "cluster_id"
+    properties:
+      cluster_id:
+        type: "string"
+    example:
+      cluster_id: "cluster_id"
+  ClustersGetRequest:
+    required:
+    - "cluster_id"
+    properties:
+      cluster_id:
+        type: "string"
+  ClustersGetResponse:
+    allOf:
+    - $ref: "#/definitions/ClustersClusterInfo"
+  ClustersListResponse:
+    properties:
+      clusters:
+        type: "array"
+        items:
+          $ref: "#/definitions/ClustersClusterInfo"
+  ClustersClusterInfo:
+    properties:
+      num_workers:
+        type: "integer"
+        format: "int32"
+      autoscale:
+        $ref: "#/definitions/ClustersAutoScale"
+      cluster_id:
+        type: "string"
+      creator_user_name:
+        type: "string"
+      driver:
+        $ref: "#/definitions/ClustersSparkNode"
+      executors:
+        type: "array"
+        items:
+          $ref: "#/definitions/ClustersSparkNode"
+      spark_context_id:
+        type: "integer"
+        format: "int64"
+      jdbc_port:
+        type: "integer"
+        format: "int32"
+      cluster_name:
+        type: "string"
+      spark_version:
+        type: "string"
+      spark_conf:
+        type: "object"
+        additionalProperties:
+          type: "string"
+      aws_attributes:
+        $ref: "#/definitions/ClustersAwsAttributes"
+      node_type_id:
+        type: "string"
+      driver_node_type_id:
+        type: "string"
+      ssh_public_keys:
+        type: "array"
+        items:
+          type: "string"
+      custom_tags:
+        type: "object"
+        additionalProperties:
+          type: "string"
+      cluster_log_conf:
+        $ref: "#/definitions/ClustersClusterLogConf"
+      spark_env_vars:
+        type: "object"
+        additionalProperties:
+          type: "string"
+      autotermination_minutes:
+        type: "integer"
+        format: "int32"
+      enable_elastic_disk:
+        type: "boolean"
+      cluster_source:
+        $ref: "#/definitions/ClustersClusterSource"
+      state:
+        $ref: "#/definitions/ClustersClusterState"
+      state_message:
+        type: "string"
+      start_time:
+        type: "integer"
+        format: "int64"
+      terminated_time:
+        type: "integer"
+        format: "int64"
+      last_state_loss_time:
+        type: "integer"
+        format: "int64"
+      last_activity_time:
+        type: "integer"
+        format: "int64"
+      cluster_memory_mb:
+        type: "integer"
+        format: "int64"
+      cluster_cores:
+        type: "number"
+        format: "float"
+      default_tags:
+        type: "object"
+        additionalProperties:
+          type: "string"
+      cluster_log_status:
+        $ref: "#/definitions/ClustersLogSyncStatus"
+      termination_reason:
+        $ref: "#/definitions/ClustersTerminationReason"
+  ClustersAutoScale:
+    properties:
+      min_workers:
+        type: "integer"
+        format: "int32"
+      max_workers:
+        type: "integer"
+        format: "int32"
+    example:
+      max_workers: 1
+      min_workers: 6
+  ClustersAwsAttributes:
+    properties:
+      first_on_demand:
+        type: "integer"
+        format: "int32"
+      availability:
+        $ref: "#/definitions/ClustersAwsAvailability"
+      zone_id:
+        type: "string"
+      instance_profile_arn:
+        type: "string"
+      spot_bid_price_percent:
+        type: "integer"
+        format: "int32"
+      ebs_volume_type:
+        $ref: "#/definitions/ClustersEbsVolumeType"
+      ebs_volume_count:
+        type: "integer"
+        format: "int32"
+      ebs_volume_size:
+        type: "integer"
+        format: "int32"
+    example:
+      ebs_volume_count: 2
+      zone_id: "zone_id"
+      ebs_volume_size: 7
+      spot_bid_price_percent: 5
+      availability: {}
+      ebs_volume_type: {}
+      first_on_demand: 5
+      instance_profile_arn: "instance_profile_arn"
+  ClustersSparkNode:
+    properties:
+      private_ip:
+        type: "string"
+      public_dns:
+        type: "string"
+      node_id:
+        type: "string"
+      instance_id:
+        type: "string"
+      start_timestamp:
+        type: "integer"
+        format: "int64"
+      host_private_ip:
+        type: "string"
+  ClustersClusterLogConf:
+    properties:
+      dbfs:
+        $ref: "#/definitions/ClustersDbfsStorageInfo"
+    example:
+      dbfs:
+        destination: "destination"
+  ClustersDbfsStorageInfo:
+    properties:
+      destination:
+        type: "string"
+    example:
+      destination: "destination"
+  ClustersClusterSource:
+    type: "string"
+    enum:
+    - "UI"
+    - "JOB"
+    - "API"
+  ClustersClusterState:
+    type: "string"
+    enum:
+    - "PENDING_CLUSTER_STATE"
+    - "RUNNING_CLUSTER_STATE"
+    - "RESTARTING_CLUSTER_STATE"
+    - "RESIZING_CLUSTER_STATE"
+    - "TERMINATING_CLUSTER_STATE"
+    - "TERMINATED_CLUSTER_STATE"
+    - "ERROR_CLUSTER_STATE"
+    - "UNKNOWN_CLUSTER_STATE"
+  ClustersLogSyncStatus:
+    properties:
+      last_attempted:
+        type: "integer"
+        format: "int64"
+      last_exception:
+        type: "string"
+  ClustersTerminationReason:
+    properties:
+      code:
+        $ref: "#/definitions/ClustersTerminationCode"
+      parameters:
+        type: "object"
+        additionalProperties:
+          type: "string"
+  ClustersTerminationCode:
+    type: "string"
+    enum:
+    - "USER_REQUEST"
+    - "JOB_FINISHED"
+    - "INACTIVITY"
+    - "CLOUD_PROVIDER_SHUTDOWN"
+    - "COMMUNICATION_LOST"
+    - "CLOUD_PROVIDER_LAUNCH_FAILURE"
+    - "SPARK_STARTUP_FAILURE"
+    - "INVALID_ARGUMENT"
+    - "UNEXPECTED_LAUNCH_FAILURE"
+    - "INTERNAL_ERROR"
+    - "INSTANCE_UNREACHABLE"
+    - "REQUEST_REJECTED"
+  ClustersAwsAvailability:
+    type: "string"
+    enum:
+    - "SPOT"
+    - "ON_DEMAND"
+    - "SPOT_WITH_FALLBACK"
+  ClustersEbsVolumeType:
+    type: "string"
+    enum:
+    - "GENERAL_PURPOSE_SSD"
+    - "THROUGHPUT_OPTIMIZED_HDD"
+  JobsCreateRequest:
+    $ref: "#/definitions/JobSettings"
+  JobsCreateResponse:
+    properties:
+      job_id:
+        type: "integer"
+    example:
+      job_id: 0
+  JobsGetResponse:
+    $ref: "#/definitions/Job"
+  JobsResetRequest:
+    properties:
+      job_id:
+        type: "integer"
+      new_settings:
+        $ref: "#/definitions/JobSettings"
+    example:
+      job_id: 0
+      new_settings:
+        new_cluster: ""
+        max_retries: 1
+        min_retry_interval_millis: 5
+        max_concurrent_runs: 5
+        libraries:
+        - cran:
+            package: "package"
+            repo: "repo"
+          egg: "egg"
+          pypi:
+            package: "package"
+            repo: "repo"
+          maven:
+            repo: "repo"
+            coordinates: "coordinates"
+            exclusions:
+            - "exclusions"
+            - "exclusions"
+          jar: "jar"
+          whl: "whl"
+        - cran:
+            package: "package"
+            repo: "repo"
+          egg: "egg"
+          pypi:
+            package: "package"
+            repo: "repo"
+          maven:
+            repo: "repo"
+            coordinates: "coordinates"
+            exclusions:
+            - "exclusions"
+            - "exclusions"
+          jar: "jar"
+          whl: "whl"
+        retry_on_timeout: true
+        spark_submit_task:
+          parameters:
+          - "parameters"
+          - "parameters"
+        spark_jar_task:
+          jar_uri: "jar_uri"
+          parameters:
+          - "parameters"
+          - "parameters"
+          main_class_name: "main_class_name"
+        schedule:
+          quartz_cron_expression: "quartz_cron_expression"
+          timezone_id: "timezone_id"
+        notebook_task:
+          notebook_path: "notebook_path"
+          base_parameters:
+          - {}
+          - {}
+        spark_python_task:
+          python_file: "python_file"
+          parameters:
+          - "parameters"
+          - "parameters"
+        name: "name"
+        email_notifications:
+          on_failure:
+          - "on_failure"
+          - "on_failure"
+          no_alert_for_skipped_runs: true
+          on_start:
+          - "on_start"
+          - "on_start"
+          on_success:
+          - "on_success"
+          - "on_success"
+        existing_cluster_id: "existing_cluster_id"
+        timeout_seconds: 6
+  JobsDeleteRequest:
+    required:
+    - "job_id"
+    properties:
+      job_id:
+        type: "integer"
+    example:
+      job_id: 0
+  ClusterInstance:
+    properties:
+      cluster_id:
+        type: "string"
+      spark_context_id:
+        type: "string"
+  ClusterSpec:
+    properties:
+      existing_cluster_id:
+        type: "string"
+      new_cluster:
+        $ref: "#/definitions/NewCluster"
+      libraries:
+        type: "array"
+        items:
+          $ref: "#/definitions/Library"
+  CronSchedule:
+    required:
+    - "quartz_cron_expression"
+    - "timezone_id"
+    properties:
+      quartz_cron_expression:
+        type: "string"
+      timezone_id:
+        type: "string"
+    example:
+      quartz_cron_expression: "quartz_cron_expression"
+      timezone_id: "timezone_id"
+  Job:
+    properties:
+      job_id:
+        type: "integer"
+      creator_user_name:
+        type: "string"
+      settings:
+        $ref: "#/definitions/JobSettings"
+      created_time:
+        type: "integer"
+  JobEmailNotifications:
+    properties:
+      on_start:
+        type: "array"
+        items:
+          type: "string"
+      on_success:
+        type: "array"
+        items:
+          type: "string"
+      on_failure:
+        type: "array"
+        items:
+          type: "string"
+      no_alert_for_skipped_runs:
+        type: "boolean"
+    example:
+      on_failure:
+      - "on_failure"
+      - "on_failure"
+      no_alert_for_skipped_runs: true
+      on_start:
+      - "on_start"
+      - "on_start"
+      on_success:
+      - "on_success"
+      - "on_success"
+  JobSettings:
+    properties:
+      new_cluster:
+        $ref: "#/definitions/NewCluster"
+      existing_cluster_id:
+        type: "string"
+      notebook_task:
+        $ref: "#/definitions/NotebookTask"
+      spark_jar_task:
+        $ref: "#/definitions/SparkJarTask"
+      spark_python_task:
+        $ref: "#/definitions/SparkPythonTask"
+      spark_submit_task:
+        $ref: "#/definitions/SparkSubmitTask"
+      name:
+        type: "string"
+      libraries:
+        type: "array"
+        items:
+          $ref: "#/definitions/Library"
+      email_notifications:
+        $ref: "#/definitions/JobEmailNotifications"
+      timeout_seconds:
+        type: "integer"
+      max_retries:
+        type: "integer"
+      min_retry_interval_millis:
+        type: "integer"
+      retry_on_timeout:
+        type: "boolean"
+      schedule:
+        $ref: "#/definitions/CronSchedule"
+      max_concurrent_runs:
+        type: "integer"
+    example:
+      new_cluster: ""
+      max_retries: 1
+      min_retry_interval_millis: 5
+      max_concurrent_runs: 5
+      libraries:
+      - cran:
+          package: "package"
+          repo: "repo"
+        egg: "egg"
+        pypi:
+          package: "package"
+          repo: "repo"
+        maven:
+          repo: "repo"
+          coordinates: "coordinates"
+          exclusions:
+          - "exclusions"
+          - "exclusions"
+        jar: "jar"
+        whl: "whl"
+      - cran:
+          package: "package"
+          repo: "repo"
+        egg: "egg"
+        pypi:
+          package: "package"
+          repo: "repo"
+        maven:
+          repo: "repo"
+          coordinates: "coordinates"
+          exclusions:
+          - "exclusions"
+          - "exclusions"
+        jar: "jar"
+        whl: "whl"
+      retry_on_timeout: true
+      spark_submit_task:
+        parameters:
+        - "parameters"
+        - "parameters"
+      spark_jar_task:
+        jar_uri: "jar_uri"
+        parameters:
+        - "parameters"
+        - "parameters"
+        main_class_name: "main_class_name"
+      schedule:
+        quartz_cron_expression: "quartz_cron_expression"
+        timezone_id: "timezone_id"
+      notebook_task:
+        notebook_path: "notebook_path"
+        base_parameters:
+        - {}
+        - {}
+      spark_python_task:
+        python_file: "python_file"
+        parameters:
+        - "parameters"
+        - "parameters"
+      name: "name"
+      email_notifications:
+        on_failure:
+        - "on_failure"
+        - "on_failure"
+        no_alert_for_skipped_runs: true
+        on_start:
+        - "on_start"
+        - "on_start"
+        on_success:
+        - "on_success"
+        - "on_success"
+      existing_cluster_id: "existing_cluster_id"
+      timeout_seconds: 6
+  JobTask:
+    properties:
+      notebook_task:
+        $ref: "#/definitions/NotebookTask"
+      spark_jar_task:
+        $ref: "#/definitions/SparkJarTask"
+      spark_python_task:
+        $ref: "#/definitions/SparkPythonTask"
+      spark_submit_task:
+        $ref: "#/definitions/SparkSubmitTask"
+  NewCluster:
+    $ref: "#/definitions/ClustersCreateRequest"
+  NotebookOutput:
+    properties:
+      result:
+        type: "string"
+      truncated:
+        type: "boolean"
+  NotebookTask:
+    required:
+    - "notebook_path"
+    properties:
+      notebook_path:
+        type: "string"
+      base_parameters:
+        type: "array"
+        items:
+          $ref: "#/definitions/ParamPair"
+    example:
+      notebook_path: "notebook_path"
+      base_parameters:
+      - {}
+      - {}
+  ParamPair:
+    type: "object"
+    additionalProperties:
+      type: "string"
+  Run:
+    properties:
+      job_id:
+        type: "integer"
+      run_id:
+        type: "integer"
+      creator_user_name:
+        type: "string"
+      number_in_job:
+        type: "integer"
+      original_attempt_run_id:
+        type: "integer"
+      state:
+        $ref: "#/definitions/RunState"
+      schedule:
+        $ref: "#/definitions/CronSchedule"
+      task:
+        $ref: "#/definitions/JobTask"
+      cluster_spec:
+        $ref: "#/definitions/ClusterSpec"
+      cluster_instance:
+        $ref: "#/definitions/ClusterInstance"
+      overriding_parameters:
+        $ref: "#/definitions/RunParameters"
+      start_time:
+        type: "integer"
+      setup_duration:
+        type: "integer"
+      execution_duration:
+        type: "integer"
+      cleanup_duration:
+        type: "integer"
+      trigger:
+        $ref: "#/definitions/TriggerType"
+  RunParameters:
+    properties:
+      jar_params:
+        type: "array"
+        items:
+          type: "string"
+      notebook_params:
+        type: "array"
+        items:
+          $ref: "#/definitions/ParamPair"
+      python_params:
+        type: "array"
+        items:
+          type: "string"
+      spark_submit_params:
+        type: "array"
+        items:
+          type: "string"
+  RunState:
+    properties:
+      life_cycle_state:
+        $ref: "#/definitions/RunLifeCycleState"
+      result_state:
+        $ref: "#/definitions/RunResultState"
+      state_message:
+        type: "string"
+  SparkJarTask:
+    properties:
+      jar_uri:
+        type: "string"
+      main_class_name:
+        type: "string"
+      parameters:
+        type: "array"
+        items:
+          type: "string"
+    example:
+      jar_uri: "jar_uri"
+      parameters:
+      - "parameters"
+      - "parameters"
+      main_class_name: "main_class_name"
+  SparkPythonTask:
+    required:
+    - "python_file"
+    properties:
+      python_file:
+        type: "string"
+      parameters:
+        type: "array"
+        items:
+          type: "string"
+    example:
+      python_file: "python_file"
+      parameters:
+      - "parameters"
+      - "parameters"
+  SparkSubmitTask:
+    properties:
+      parameters:
+        type: "array"
+        items:
+          type: "string"
+    example:
+      parameters:
+      - "parameters"
+      - "parameters"
+  ViewItem:
+    properties:
+      content:
+        type: "string"
+      name:
+        type: "string"
+      type:
+        $ref: "#/definitions/ViewType"
+  RunLifeCycleState:
+    type: "string"
+    enum:
+    - "PENDING_RUN_STATUS"
+    - "RUNNING_RUN_STATUS"
+    - "TERMINATING_RUN_STATUS"
+    - "TERMINATED_RUN_STATUS"
+    - "SKIPPED_RUN_STATUS"
+    - "INTERNAL_ERROR_RUN_STATUS"
+  RunResultState:
+    type: "string"
+    enum:
+    - "SUCCESS_RESULT_STATE"
+    - "FAILED_RESULT_STATE"
+    - "TIMEDOUT_RESULT_STATE"
+    - "CANCELED_RESULT_STATE"
+  TriggerType:
+    type: "string"
+    enum:
+    - "PERIODIC_TRIGGER_TYPE"
+    - "ONE_TIME_TRIGGER_TYPE"
+    - "RETRY_TRIGGER_TYPE"
+  ViewType:
+    type: "string"
+    enum:
+    - "NOTEBOOK_VIEW_TYPE"
+    - "DASHBOARD_VIEW_TYPE"
+  ViewsToExport:
+    type: "string"
+    enum:
+    - "CODE_EXPORT"
+    - "DASHBOARDS_EXPORT"
+    - "ALL_EXPORT"
+  LibrariesInstallRequest:
+    required:
+    - "cluster_id"
+    properties:
+      cluster_id:
+        type: "string"
+      libraries:
+        type: "array"
+        items:
+          $ref: "#/definitions/Library"
+    example:
+      cluster_id: "cluster_id"
+      libraries:
+      - cran:
+          package: "package"
+          repo: "repo"
+        egg: "egg"
+        pypi:
+          package: "package"
+          repo: "repo"
+        maven:
+          repo: "repo"
+          coordinates: "coordinates"
+          exclusions:
+          - "exclusions"
+          - "exclusions"
+        jar: "jar"
+        whl: "whl"
+      - cran:
+          package: "package"
+          repo: "repo"
+        egg: "egg"
+        pypi:
+          package: "package"
+          repo: "repo"
+        maven:
+          repo: "repo"
+          coordinates: "coordinates"
+          exclusions:
+          - "exclusions"
+          - "exclusions"
+        jar: "jar"
+        whl: "whl"
+  LibrariesUninstallRequest:
+    required:
+    - "cluster_id"
+    properties:
+      cluster_id:
+        type: "string"
+      libraries:
+        type: "array"
+        items:
+          $ref: "#/definitions/Library"
+    example:
+      cluster_id: "cluster_id"
+      libraries:
+      - cran:
+          package: "package"
+          repo: "repo"
+        egg: "egg"
+        pypi:
+          package: "package"
+          repo: "repo"
+        maven:
+          repo: "repo"
+          coordinates: "coordinates"
+          exclusions:
+          - "exclusions"
+          - "exclusions"
+        jar: "jar"
+        whl: "whl"
+      - cran:
+          package: "package"
+          repo: "repo"
+        egg: "egg"
+        pypi:
+          package: "package"
+          repo: "repo"
+        maven:
+          repo: "repo"
+          coordinates: "coordinates"
+          exclusions:
+          - "exclusions"
+          - "exclusions"
+        jar: "jar"
+        whl: "whl"
+  ClusterLibraryStatuses:
+    properties:
+      cluster_id:
+        type: "string"
+      library_statuses:
+        type: "array"
+        items:
+          $ref: "#/definitions/LibraryFullStatus"
+  Library:
+    properties:
+      jar:
+        type: "string"
+      egg:
+        type: "string"
+      whl:
+        type: "string"
+      pypi:
+        $ref: "#/definitions/PythonPyPiLibrary"
+      maven:
+        $ref: "#/definitions/MavenLibrary"
+      cran:
+        $ref: "#/definitions/RCranLibrary"
+    example:
+      cran:
+        package: "package"
+        repo: "repo"
+      egg: "egg"
+      pypi:
+        package: "package"
+        repo: "repo"
+      maven:
+        repo: "repo"
+        coordinates: "coordinates"
+        exclusions:
+        - "exclusions"
+        - "exclusions"
+      jar: "jar"
+      whl: "whl"
+  LibraryFullStatus:
+    properties:
+      library:
+        $ref: "#/definitions/Library"
+      status:
+        $ref: "#/definitions/LibraryInstallStatus"
+      messages:
+        type: "array"
+        items:
+          type: "string"
+      is_library_for_all_clusters:
+        type: "boolean"
+  MavenLibrary:
+    properties:
+      coordinates:
+        type: "string"
+      repo:
+        type: "string"
+      exclusions:
+        type: "array"
+        items:
+          type: "string"
+    example:
+      repo: "repo"
+      coordinates: "coordinates"
+      exclusions:
+      - "exclusions"
+      - "exclusions"
+  PythonPyPiLibrary:
+    properties:
+      package:
+        type: "string"
+      repo:
+        type: "string"
+    example:
+      package: "package"
+      repo: "repo"
+  RCranLibrary:
+    properties:
+      package:
+        type: "string"
+      repo:
+        type: "string"
+    example:
+      package: "package"
+      repo: "repo"
+  LibraryInstallStatus:
+    type: "string"
+    enum:
+    - "PENDING_LIBRARY_STATUS"
+    - "RESOLVING_LIBRARY_STATUS"
+    - "INSTALLING_LIBRARY_STATUS"
+    - "INSTALLED_LIBRARY_STATUS"
+    - "FAILED_LIBRARY_STATUS"
+    - "UNINSTALL_ON_RESTART_LIBRARY_STATUS"
+  ErrorResponse:
+    required:
+    - "error_code"
+    - "message"
+    properties:
+      error_code:
+        type: "string"
+      message:
+        type: "string"
+externalDocs:
+  description: "The Databricks REST API 2.0 supports of a variety of services."
+  url: "https://docs.databricks.com/api/latest/index.html"

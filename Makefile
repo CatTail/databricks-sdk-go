@@ -7,4 +7,7 @@ build-examples:
 build: swagger-codegen-cli.jar
 	java -jar swagger-codegen-cli.jar generate -i swagger.yaml -l go -c config.json -o client
 
-.PHONY: build
+clean:
+	rm -rf ./client
+
+.PHONY: build clean

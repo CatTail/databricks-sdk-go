@@ -1,4 +1,3 @@
 swagger-codegen-cli.jar
-client/
 examples/*/main
 secrets.json
