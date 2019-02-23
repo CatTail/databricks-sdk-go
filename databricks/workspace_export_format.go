@@ -13,8 +13,8 @@ type WorkspaceExportFormat string
 
 // List of WorkspaceExportFormat
 const (
-	SOURCE WorkspaceExportFormat = "SOURCE"
-	HTML WorkspaceExportFormat = "HTML"
-	JUPYTER WorkspaceExportFormat = "JUPYTER"
-	DBC WorkspaceExportFormat = "DBC"
+	SOURCE_WorkspaceExportFormat WorkspaceExportFormat = "SOURCE"
+	HTML_WorkspaceExportFormat WorkspaceExportFormat = "HTML"
+	JUPYTER_WorkspaceExportFormat WorkspaceExportFormat = "JUPYTER"
+	DBC_WorkspaceExportFormat WorkspaceExportFormat = "DBC"
 )

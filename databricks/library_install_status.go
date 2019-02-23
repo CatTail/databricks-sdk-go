@@ -13,10 +13,10 @@ type LibraryInstallStatus string
 
 // List of LibraryInstallStatus
 const (
-	PENDING_LIBRARY_STATUS LibraryInstallStatus = "PENDING_LIBRARY_STATUS"
-	RESOLVING_LIBRARY_STATUS LibraryInstallStatus = "RESOLVING_LIBRARY_STATUS"
-	INSTALLING_LIBRARY_STATUS LibraryInstallStatus = "INSTALLING_LIBRARY_STATUS"
-	INSTALLED_LIBRARY_STATUS LibraryInstallStatus = "INSTALLED_LIBRARY_STATUS"
-	FAILED_LIBRARY_STATUS LibraryInstallStatus = "FAILED_LIBRARY_STATUS"
-	UNINSTALL_ON_RESTART_LIBRARY_STATUS LibraryInstallStatus = "UNINSTALL_ON_RESTART_LIBRARY_STATUS"
+	PENDING_LibraryInstallStatus LibraryInstallStatus = "PENDING"
+	RESOLVING_LibraryInstallStatus LibraryInstallStatus = "RESOLVING"
+	INSTALLING_LibraryInstallStatus LibraryInstallStatus = "INSTALLING"
+	INSTALLED_LibraryInstallStatus LibraryInstallStatus = "INSTALLED"
+	FAILED_LibraryInstallStatus LibraryInstallStatus = "FAILED"
+	UNINSTALL_ON_RESTART_LibraryInstallStatus LibraryInstallStatus = "UNINSTALL_ON_RESTART"
 )

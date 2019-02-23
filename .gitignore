@@ -1,3 +1,3 @@
-bin/swagger-codegen-cli.jar
+# bin/swagger-codegen-cli.jar
 bin/example
 examples/secrets.json

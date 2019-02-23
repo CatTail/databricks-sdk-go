@@ -13,7 +13,7 @@ type TriggerType string
 
 // List of TriggerType
 const (
-	PERIODIC_TRIGGER_TYPE TriggerType = "PERIODIC_TRIGGER_TYPE"
-	ONE_TIME_TRIGGER_TYPE TriggerType = "ONE_TIME_TRIGGER_TYPE"
-	RETRY_TRIGGER_TYPE TriggerType = "RETRY_TRIGGER_TYPE"
+	PERIODIC_TriggerType TriggerType = "PERIODIC"
+	ONE_TIME_TriggerType TriggerType = "ONE_TIME"
+	RETRY_TriggerType TriggerType = "RETRY"
 )

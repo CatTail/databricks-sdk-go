@@ -13,7 +13,7 @@ type ClustersClusterSource string
 
 // List of ClustersClusterSource
 const (
-	UI ClustersClusterSource = "UI"
-	JOB ClustersClusterSource = "JOB"
-	API ClustersClusterSource = "API"
+	UI_ClustersClusterSource ClustersClusterSource = "UI"
+	JOB_ClustersClusterSource ClustersClusterSource = "JOB"
+	API_ClustersClusterSource ClustersClusterSource = "API"
 )

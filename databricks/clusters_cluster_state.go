@@ -13,12 +13,12 @@ type ClustersClusterState string
 
 // List of ClustersClusterState
 const (
-	PENDING_CLUSTER_STATE ClustersClusterState = "PENDING_CLUSTER_STATE"
-	RUNNING_CLUSTER_STATE ClustersClusterState = "RUNNING_CLUSTER_STATE"
-	RESTARTING_CLUSTER_STATE ClustersClusterState = "RESTARTING_CLUSTER_STATE"
-	RESIZING_CLUSTER_STATE ClustersClusterState = "RESIZING_CLUSTER_STATE"
-	TERMINATING_CLUSTER_STATE ClustersClusterState = "TERMINATING_CLUSTER_STATE"
-	TERMINATED_CLUSTER_STATE ClustersClusterState = "TERMINATED_CLUSTER_STATE"
-	ERROR_CLUSTER_STATE ClustersClusterState = "ERROR_CLUSTER_STATE"
-	UNKNOWN_CLUSTER_STATE ClustersClusterState = "UNKNOWN_CLUSTER_STATE"
+	PENDING_ClustersClusterState ClustersClusterState = "PENDING"
+	RUNNING_ClustersClusterState ClustersClusterState = "RUNNING"
+	RESTARTING_ClustersClusterState ClustersClusterState = "RESTARTING"
+	RESIZING_ClustersClusterState ClustersClusterState = "RESIZING"
+	TERMINATING_ClustersClusterState ClustersClusterState = "TERMINATING"
+	TERMINATED_ClustersClusterState ClustersClusterState = "TERMINATED"
+	ERROR__ClustersClusterState ClustersClusterState = "ERROR"
+	UNKNOWN_ClustersClusterState ClustersClusterState = "UNKNOWN"
 )

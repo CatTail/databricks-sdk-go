@@ -13,7 +13,7 @@ type WorkspaceObjectType string
 
 // List of WorkspaceObjectType
 const (
-	NOTEBOOK_OBJECT_TYPE WorkspaceObjectType = "NOTEBOOK_OBJECT_TYPE"
-	DIRECTORY_OBJECT_TYPE WorkspaceObjectType = "DIRECTORY_OBJECT_TYPE"
-	LIBRARY_OBJECT_TYPE WorkspaceObjectType = "LIBRARY_OBJECT_TYPE"
+	NOTEBOOK_WorkspaceObjectType WorkspaceObjectType = "NOTEBOOK"
+	DIRECTORY_WorkspaceObjectType WorkspaceObjectType = "DIRECTORY"
+	LIBRARY_WorkspaceObjectType WorkspaceObjectType = "LIBRARY"
 )

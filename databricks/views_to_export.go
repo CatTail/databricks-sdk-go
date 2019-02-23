@@ -13,7 +13,7 @@ type ViewsToExport string
 
 // List of ViewsToExport
 const (
-	CODE_EXPORT ViewsToExport = "CODE_EXPORT"
-	DASHBOARDS_EXPORT ViewsToExport = "DASHBOARDS_EXPORT"
-	ALL_EXPORT ViewsToExport = "ALL_EXPORT"
+	CODE_ViewsToExport ViewsToExport = "CODE"
+	DASHBOARDS_ViewsToExport ViewsToExport = "DASHBOARDS"
+	ALL_ViewsToExport ViewsToExport = "ALL"
 )

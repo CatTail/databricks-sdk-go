@@ -14,7 +14,7 @@ func main() {
 
 	fmt.Println("")
 	fmt.Println("EditCluster")
-	examples.WaitClusterState(clusterId, databricks.RUNNING_CLUSTER_STATE)
+	examples.WaitClusterState(clusterId, databricks.RUNNING_ClustersClusterState)
 	examples.EditCluster(clusterId)
 	examples.JsonPrint(examples.GetCluster(clusterId))
 

@@ -13,8 +13,8 @@ type WorkspaceLanguage string
 
 // List of WorkspaceLanguage
 const (
-	SCALA WorkspaceLanguage = "SCALA"
-	PYTHON WorkspaceLanguage = "PYTHON"
-	SQL WorkspaceLanguage = "SQL"
-	R WorkspaceLanguage = "R"
+	SCALA_WorkspaceLanguage WorkspaceLanguage = "SCALA"
+	PYTHON_WorkspaceLanguage WorkspaceLanguage = "PYTHON"
+	SQL_WorkspaceLanguage WorkspaceLanguage = "SQL"
+	R_WorkspaceLanguage WorkspaceLanguage = "R"
 )

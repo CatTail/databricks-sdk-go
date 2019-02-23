@@ -13,7 +13,7 @@ type ClustersAwsAvailability string
 
 // List of ClustersAwsAvailability
 const (
-	SPOT ClustersAwsAvailability = "SPOT"
-	ON_DEMAND ClustersAwsAvailability = "ON_DEMAND"
-	SPOT_WITH_FALLBACK ClustersAwsAvailability = "SPOT_WITH_FALLBACK"
+	SPOT_ClustersAwsAvailability ClustersAwsAvailability = "SPOT"
+	ON_DEMAND_ClustersAwsAvailability ClustersAwsAvailability = "ON_DEMAND"
+	SPOT_WITH_FALLBACK_ClustersAwsAvailability ClustersAwsAvailability = "SPOT_WITH_FALLBACK"
 )
