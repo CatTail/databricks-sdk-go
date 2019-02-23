@@ -7,7 +7,7 @@ import (
 const jar = "dbfs:/mnt/libraries/library.jar"
 
 func InstallLibrary(clusterId string) {
-	_, err := client.LibraryApi.InstallLibrary(auth, databricks.LibrariesInstallRequest{
+	_, err := client.LibraryApi.InstallLibrary(ctx, databricks.LibrariesInstallRequest{
 		ClusterId: clusterId,
 		Libraries: []databricks.Library{{Jar: jar}},
 	})
@@ -17,7 +17,7 @@ func InstallLibrary(clusterId string) {
 }
 
 func UninstallLibrary(clusterId string) {
-	_, err := client.LibraryApi.UninstallLibrary(auth, databricks.LibrariesUninstallRequest{
+	_, err := client.LibraryApi.UninstallLibrary(ctx, databricks.LibrariesUninstallRequest{
 		ClusterId: clusterId,
 		Libraries: []databricks.Library{{Jar: jar}},
 	})

@@ -13,7 +13,7 @@ const (
 )
 
 func CreateCluster() databricks.ClustersCreateResponse {
-	res, _, err := client.ClusterApi.CreateCluster(auth, databricks.ClustersCreateRequest{
+	res, _, err := client.ClusterApi.CreateCluster(ctx, databricks.ClustersCreateRequest{
 		ClusterName:  ClusterName,
 		SparkVersion: SparkVersion,
 		NodeTypeId:   NodeTypeId,
@@ -27,7 +27,7 @@ func CreateCluster() databricks.ClustersCreateResponse {
 }
 
 func GetCluster(clusterId string) databricks.ClustersGetResponse {
-	res, _, err := client.ClusterApi.GetCluster(auth, clusterId)
+	res, _, err := client.ClusterApi.GetCluster(ctx, clusterId)
 	if err != nil {
 		panic(err)
 	}
@@ -37,7 +37,7 @@ func GetCluster(clusterId string) databricks.ClustersGetResponse {
 func EditCluster(clusterId string) {
 	WaitClusterState(clusterId, databricks.RUNNING_ClustersClusterState)
 
-	_, err := client.ClusterApi.EditCluster(auth, databricks.ClustersEditRequest{
+	_, err := client.ClusterApi.EditCluster(ctx, databricks.ClustersEditRequest{
 		ClusterId:    clusterId,
 		ClusterName:  ClusterName,
 		SparkVersion: SparkVersion,
@@ -50,7 +50,7 @@ func EditCluster(clusterId string) {
 }
 
 func DeleteCluster(clusterId string) {
-	_, err := client.ClusterApi.PermanentDeleteCluster(auth, databricks.ClustersPermanentDeleteRequest{
+	_, err := client.ClusterApi.PermanentDeleteCluster(ctx, databricks.ClustersPermanentDeleteRequest{
 		ClusterId: clusterId,
 	})
 	if err != nil {

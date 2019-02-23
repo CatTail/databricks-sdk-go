@@ -13,7 +13,7 @@ import (
 
 var secrets = LoadSecrets()
 var client = GetClient()
-var auth = GetAuth()
+var ctx = GetContext()
 
 func GetClient() *databricks.APIClient {
 	cfg := databricks.NewConfiguration()
@@ -21,7 +21,7 @@ func GetClient() *databricks.APIClient {
 	return databricks.NewAPIClient(cfg)
 }
 
-func GetAuth() context.Context {
+func GetContext() context.Context {
 	return context.WithValue(context.Background(), databricks.ContextAPIKey, databricks.APIKey{
 		Key: secrets.Token,
 		Prefix: "Bearer",
