@@ -4,15 +4,18 @@ import (
 	"github.com/cattail/databricks-sdk-go/databricks"
 )
 
-func CreateJob() databricks.JobsCreateResponse {
-	res, _, err := client.JobApi.CreateJob(auth, databricks.JobsCreateRequest{})
+func CreateJob(clusterId string) databricks.JobsCreateResponse {
+	res, _, err := client.JobApi.CreateJob(auth, databricks.JobsCreateRequest{
+		Name:              "databricks-sdk-go job name",
+		ExistingClusterId: clusterId,
+	})
 	if err != nil {
 		panic(err)
 	}
 	return res
 }
 
-func GetJob(jobId int32) databricks.JobsGetResponse {
+func GetJob(jobId int64) databricks.JobsGetResponse {
 	res, _, err := client.JobApi.GetJob(auth, jobId)
 	if err != nil {
 		panic(err)
@@ -20,15 +23,21 @@ func GetJob(jobId int32) databricks.JobsGetResponse {
 	return res
 }
 
-func ResetJob() {
-	_, err := client.JobApi.ResetJob(auth, databricks.JobsResetRequest{})
+func ResetJob(jobId int64, clusterId string) {
+	_, err := client.JobApi.ResetJob(auth, databricks.JobsResetRequest{
+		JobId: jobId,
+		NewSettings: &databricks.JobSettings{
+			Name:              "databricks-sdk-go new job name",
+			ExistingClusterId: clusterId,
+		},
+	})
 	if err != nil {
 		panic(err)
 	}
 }
 
-func DeleteJob() {
-	_, err := client.JobApi.DeleteJob(auth, databricks.JobsDeleteRequest{})
+func DeleteJob(jobId int64) {
+	_, err := client.JobApi.DeleteJob(auth, databricks.JobsDeleteRequest{JobId: jobId})
 	if err != nil {
 		panic(err)
 	}

@@ -125,6 +125,7 @@ paths:
           name: "job_id"
           required: true
           type: integer
+          format: int64
       responses:
         200:
           description:
@@ -658,17 +659,21 @@ definitions:
   ### Jobs ###
   # Requests and responses
   JobsCreateRequest:
-    $ref: "#/definitions/JobSettings"
+    allOf:
+      - $ref: "#/definitions/JobSettings"
   JobsCreateResponse:
     properties:
       job_id:
         type: integer
+        format: int64
   JobsGetResponse:
-    $ref: "#/definitions/Job"
+    allOf:
+      - $ref: "#/definitions/Job"
   JobsResetRequest:
     properties:
       job_id:
         type: integer
+        format: int64
       new_settings:
         $ref: "#/definitions/JobSettings"
   JobsDeleteRequest:
@@ -677,6 +682,7 @@ definitions:
     properties:
       job_id:
         type: integer
+        format: int64
   # Data Structures
   ClusterInstance:
     properties:
@@ -707,12 +713,14 @@ definitions:
     properties:
       job_id:
         type: integer
+        format: int64
       creator_user_name:
         type: string
       settings:
         $ref: "#/definitions/JobSettings"
       created_time:
         type: integer
+        format: int64
   JobEmailNotifications:
     properties:
       on_start:
@@ -774,7 +782,8 @@ definitions:
       spark_submit_task:
         $ref: "#/definitions/SparkSubmitTask"
   NewCluster:
-    $ref: "#/definitions/ClustersCreateRequest"
+    allOf:
+      - $ref: "#/definitions/ClustersCreateRequest"
   NotebookOutput:
     properties:
       result:
@@ -799,14 +808,18 @@ definitions:
     properties:
       job_id:
         type: integer
+        format: int64
       run_id:
         type: integer
+        format: int64
       creator_user_name:
         type: string
       number_in_job:
         type: integer
+        format: int64
       original_attempt_run_id:
         type: integer
+        format: int64
       state:
         $ref: "#/definitions/RunState"
       schedule:
@@ -821,12 +834,16 @@ definitions:
         $ref: "#/definitions/RunParameters"
       start_time:
         type: integer
+        format: int64
       setup_duration:
         type: integer
+        format: int64
       execution_duration:
         type: integer
+        format: int64
       cleanup_duration:
         type: integer
+        format: int64
       trigger:
         $ref: "#/definitions/TriggerType"
   RunParameters:

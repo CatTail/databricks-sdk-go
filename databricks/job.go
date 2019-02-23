@@ -11,11 +11,11 @@ package databricks
 
 type Job struct {
 
-	JobId int32 `json:"job_id,omitempty"`
+	JobId int64 `json:"job_id,omitempty"`
 
 	CreatorUserName string `json:"creator_user_name,omitempty"`
 
 	Settings *JobSettings `json:"settings,omitempty"`
 
-	CreatedTime int32 `json:"created_time,omitempty"`
+	CreatedTime int64 `json:"created_time,omitempty"`
 }

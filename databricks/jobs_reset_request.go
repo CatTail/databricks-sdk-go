@@ -11,7 +11,7 @@ package databricks
 
 type JobsResetRequest struct {
 
-	JobId int32 `json:"job_id,omitempty"`
+	JobId int64 `json:"job_id,omitempty"`
 
 	NewSettings *JobSettings `json:"new_settings,omitempty"`
 }

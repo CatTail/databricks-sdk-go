@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	ClusterName  = "databricks-sdk-go generated cluster name"
+	ClusterName  = "databricks-sdk-go example cluster name"
 	SparkVersion = "4.2.x-scala2.11"
 	NodeTypeId   = "r3.xlarge"
 )
@@ -35,6 +35,8 @@ func GetCluster(clusterId string) databricks.ClustersGetResponse {
 }
 
 func EditCluster(clusterId string) {
+	WaitClusterState(clusterId, databricks.RUNNING_ClustersClusterState)
+
 	_, err := client.ClusterApi.EditCluster(auth, databricks.ClustersEditRequest{
 		ClusterId:    clusterId,
 		ClusterName:  ClusterName,
@@ -63,5 +65,4 @@ func WaitClusterState(clusterId string, state databricks.ClustersClusterState) {
 		time.Sleep(5 * time.Second)
 		fmt.Printf("Waiting cluster enter %s state from %s\n", state, *cluster.State)
 	}
-
 }

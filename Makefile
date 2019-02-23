@@ -13,4 +13,4 @@ run-examples: build-examples
 clean:
 	rm -rf ./databricks
 
-.PHONY: build clean
+.PHONY: build build-examples run-examples clean
