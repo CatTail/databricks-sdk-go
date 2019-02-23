@@ -296,9 +296,9 @@ definitions:
   WorkspaceObjectType:
     type: "string"
     enum:
-    - "NOTEBOOK_OBJECT_TYPE"
-    - "DIRECTORY_OBJECT_TYPE"
-    - "LIBRARY_OBJECT_TYPE"
+    - "NOTEBOOK"
+    - "DIRECTORY"
+    - "LIBRARY"
     default: "NOTEBOOK"
   WorkspaceExportFormat:
     type: "string"
@@ -703,14 +703,14 @@ definitions:
   ClustersClusterState:
     type: "string"
     enum:
-    - "PENDING_CLUSTER_STATE"
-    - "RUNNING_CLUSTER_STATE"
-    - "RESTARTING_CLUSTER_STATE"
-    - "RESIZING_CLUSTER_STATE"
-    - "TERMINATING_CLUSTER_STATE"
-    - "TERMINATED_CLUSTER_STATE"
-    - "ERROR_CLUSTER_STATE"
-    - "UNKNOWN_CLUSTER_STATE"
+    - "PENDING"
+    - "RUNNING"
+    - "RESTARTING"
+    - "RESIZING"
+    - "TERMINATING"
+    - "TERMINATED"
+    - "ERROR"
+    - "UNKNOWN"
   ClustersLogSyncStatus:
     properties:
       last_attempted:
@@ -1174,36 +1174,36 @@ definitions:
   RunLifeCycleState:
     type: "string"
     enum:
-    - "PENDING_RUN_STATUS"
-    - "RUNNING_RUN_STATUS"
-    - "TERMINATING_RUN_STATUS"
-    - "TERMINATED_RUN_STATUS"
-    - "SKIPPED_RUN_STATUS"
-    - "INTERNAL_ERROR_RUN_STATUS"
+    - "PENDING"
+    - "RUNNING"
+    - "TERMINATING"
+    - "TERMINATED"
+    - "SKIPPED"
+    - "INTERNAL_ERROR"
   RunResultState:
     type: "string"
     enum:
-    - "SUCCESS_RESULT_STATE"
-    - "FAILED_RESULT_STATE"
-    - "TIMEDOUT_RESULT_STATE"
-    - "CANCELED_RESULT_STATE"
+    - "SUCCESS"
+    - "FAILED"
+    - "TIMEDOUT"
+    - "CANCELED"
   TriggerType:
     type: "string"
     enum:
-    - "PERIODIC_TRIGGER_TYPE"
-    - "ONE_TIME_TRIGGER_TYPE"
-    - "RETRY_TRIGGER_TYPE"
+    - "PERIODIC"
+    - "ONE_TIME"
+    - "RETRY"
   ViewType:
     type: "string"
     enum:
-    - "NOTEBOOK_VIEW_TYPE"
-    - "DASHBOARD_VIEW_TYPE"
+    - "NOTEBOOK"
+    - "DASHBOARD"
   ViewsToExport:
     type: "string"
     enum:
-    - "CODE_EXPORT"
-    - "DASHBOARDS_EXPORT"
-    - "ALL_EXPORT"
+    - "CODE"
+    - "DASHBOARDS"
+    - "ALL"
   LibrariesInstallRequest:
     required:
     - "cluster_id"
@@ -1377,12 +1377,12 @@ definitions:
   LibraryInstallStatus:
     type: "string"
     enum:
-    - "PENDING_LIBRARY_STATUS"
-    - "RESOLVING_LIBRARY_STATUS"
-    - "INSTALLING_LIBRARY_STATUS"
-    - "INSTALLED_LIBRARY_STATUS"
-    - "FAILED_LIBRARY_STATUS"
-    - "UNINSTALL_ON_RESTART_LIBRARY_STATUS"
+    - "PENDING"
+    - "RESOLVING"
+    - "INSTALLING"
+    - "INSTALLED"
+    - "FAILED"
+    - "UNINSTALL_ON_RESTART"
   ErrorResponse:
     required:
     - "error_code"

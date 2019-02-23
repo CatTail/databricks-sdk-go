@@ -13,6 +13,6 @@ type ClustersEbsVolumeType string
 
 // List of ClustersEbsVolumeType
 const (
-	GENERAL_PURPOSE_SSD ClustersEbsVolumeType = "GENERAL_PURPOSE_SSD"
-	THROUGHPUT_OPTIMIZED_HDD ClustersEbsVolumeType = "THROUGHPUT_OPTIMIZED_HDD"
+	GENERAL_PURPOSE_SSD_ClustersEbsVolumeType ClustersEbsVolumeType = "GENERAL_PURPOSE_SSD"
+	THROUGHPUT_OPTIMIZED_HDD_ClustersEbsVolumeType ClustersEbsVolumeType = "THROUGHPUT_OPTIMIZED_HDD"
 )

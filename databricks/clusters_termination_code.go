@@ -13,16 +13,16 @@ type ClustersTerminationCode string
 
 // List of ClustersTerminationCode
 const (
-	USER_REQUEST ClustersTerminationCode = "USER_REQUEST"
-	JOB_FINISHED ClustersTerminationCode = "JOB_FINISHED"
-	INACTIVITY ClustersTerminationCode = "INACTIVITY"
-	CLOUD_PROVIDER_SHUTDOWN ClustersTerminationCode = "CLOUD_PROVIDER_SHUTDOWN"
-	COMMUNICATION_LOST ClustersTerminationCode = "COMMUNICATION_LOST"
-	CLOUD_PROVIDER_LAUNCH_FAILURE ClustersTerminationCode = "CLOUD_PROVIDER_LAUNCH_FAILURE"
-	SPARK_STARTUP_FAILURE ClustersTerminationCode = "SPARK_STARTUP_FAILURE"
-	INVALID_ARGUMENT ClustersTerminationCode = "INVALID_ARGUMENT"
-	UNEXPECTED_LAUNCH_FAILURE ClustersTerminationCode = "UNEXPECTED_LAUNCH_FAILURE"
-	INTERNAL_ERROR ClustersTerminationCode = "INTERNAL_ERROR"
-	INSTANCE_UNREACHABLE ClustersTerminationCode = "INSTANCE_UNREACHABLE"
-	REQUEST_REJECTED ClustersTerminationCode = "REQUEST_REJECTED"
+	USER_REQUEST_ClustersTerminationCode ClustersTerminationCode = "USER_REQUEST"
+	JOB_FINISHED_ClustersTerminationCode ClustersTerminationCode = "JOB_FINISHED"
+	INACTIVITY_ClustersTerminationCode ClustersTerminationCode = "INACTIVITY"
+	CLOUD_PROVIDER_SHUTDOWN_ClustersTerminationCode ClustersTerminationCode = "CLOUD_PROVIDER_SHUTDOWN"
+	COMMUNICATION_LOST_ClustersTerminationCode ClustersTerminationCode = "COMMUNICATION_LOST"
+	CLOUD_PROVIDER_LAUNCH_FAILURE_ClustersTerminationCode ClustersTerminationCode = "CLOUD_PROVIDER_LAUNCH_FAILURE"
+	SPARK_STARTUP_FAILURE_ClustersTerminationCode ClustersTerminationCode = "SPARK_STARTUP_FAILURE"
+	INVALID_ARGUMENT_ClustersTerminationCode ClustersTerminationCode = "INVALID_ARGUMENT"
+	UNEXPECTED_LAUNCH_FAILURE_ClustersTerminationCode ClustersTerminationCode = "UNEXPECTED_LAUNCH_FAILURE"
+	INTERNAL_ERROR_ClustersTerminationCode ClustersTerminationCode = "INTERNAL_ERROR"
+	INSTANCE_UNREACHABLE_ClustersTerminationCode ClustersTerminationCode = "INSTANCE_UNREACHABLE"
+	REQUEST_REJECTED_ClustersTerminationCode ClustersTerminationCode = "REQUEST_REJECTED"
 )

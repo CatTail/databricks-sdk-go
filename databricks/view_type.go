@@ -13,6 +13,6 @@ type ViewType string
 
 // List of ViewType
 const (
-	NOTEBOOK_VIEW_TYPE ViewType = "NOTEBOOK_VIEW_TYPE"
-	DASHBOARD_VIEW_TYPE ViewType = "DASHBOARD_VIEW_TYPE"
+	NOTEBOOK_ViewType ViewType = "NOTEBOOK"
+	DASHBOARD_ViewType ViewType = "DASHBOARD"
 )

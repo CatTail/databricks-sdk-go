@@ -13,10 +13,10 @@ type RunLifeCycleState string
 
 // List of RunLifeCycleState
 const (
-	PENDING_RUN_STATUS RunLifeCycleState = "PENDING_RUN_STATUS"
-	RUNNING_RUN_STATUS RunLifeCycleState = "RUNNING_RUN_STATUS"
-	TERMINATING_RUN_STATUS RunLifeCycleState = "TERMINATING_RUN_STATUS"
-	TERMINATED_RUN_STATUS RunLifeCycleState = "TERMINATED_RUN_STATUS"
-	SKIPPED_RUN_STATUS RunLifeCycleState = "SKIPPED_RUN_STATUS"
-	INTERNAL_ERROR_RUN_STATUS RunLifeCycleState = "INTERNAL_ERROR_RUN_STATUS"
+	PENDING_RunLifeCycleState RunLifeCycleState = "PENDING"
+	RUNNING_RunLifeCycleState RunLifeCycleState = "RUNNING"
+	TERMINATING_RunLifeCycleState RunLifeCycleState = "TERMINATING"
+	TERMINATED_RunLifeCycleState RunLifeCycleState = "TERMINATED"
+	SKIPPED_RunLifeCycleState RunLifeCycleState = "SKIPPED"
+	INTERNAL_ERROR_RunLifeCycleState RunLifeCycleState = "INTERNAL_ERROR"
 )

@@ -13,8 +13,8 @@ type RunResultState string
 
 // List of RunResultState
 const (
-	SUCCESS_RESULT_STATE RunResultState = "SUCCESS_RESULT_STATE"
-	FAILED_RESULT_STATE RunResultState = "FAILED_RESULT_STATE"
-	TIMEDOUT_RESULT_STATE RunResultState = "TIMEDOUT_RESULT_STATE"
-	CANCELED_RESULT_STATE RunResultState = "CANCELED_RESULT_STATE"
+	SUCCESS_RunResultState RunResultState = "SUCCESS"
+	FAILED_RunResultState RunResultState = "FAILED"
+	TIMEDOUT_RunResultState RunResultState = "TIMEDOUT"
+	CANCELED_RunResultState RunResultState = "CANCELED"
 )
