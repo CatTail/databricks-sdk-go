@@ -1,7 +1,9 @@
 package examples
 
 import (
+	"fmt"
 	"github.com/cattail/databricks-sdk-go/databricks"
+	"time"
 )
 
 const (
@@ -34,7 +36,7 @@ func GetCluster(clusterId string) databricks.ClustersGetResponse {
 
 func EditCluster(clusterId string) {
 	_, err := client.ClusterApi.EditCluster(auth, databricks.ClustersEditRequest{
-		ClusterId: clusterId,
+		ClusterId:    clusterId,
 		ClusterName:  ClusterName,
 		SparkVersion: SparkVersion,
 		NodeTypeId:   NodeTypeId,
@@ -52,4 +54,14 @@ func DeleteCluster(clusterId string) {
 	if err != nil {
 		panic(err)
 	}
+}
+
+func WaitClusterState(clusterId string, state databricks.ClustersClusterState) {
+	cluster := GetCluster(clusterId)
+	for *cluster.State != state {
+		cluster = GetCluster(clusterId)
+		time.Sleep(5 * time.Second)
+		fmt.Printf("Waiting cluster enter %s state from %s\n", state, *cluster.State)
+	}
+
 }
