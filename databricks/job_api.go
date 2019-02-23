@@ -181,7 +181,7 @@ func (a *JobApiService) DeleteJob(ctx context.Context, body JobsDeleteRequest) (
  * @param ctx context.Context for authentication, logging, tracing, etc.
  @param jobId 
  @return JobsGetResponse*/
-func (a *JobApiService) GetJob(ctx context.Context, jobId int32) (JobsGetResponse,  *http.Response, error) {
+func (a *JobApiService) GetJob(ctx context.Context, jobId int64) (JobsGetResponse,  *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody interface{}

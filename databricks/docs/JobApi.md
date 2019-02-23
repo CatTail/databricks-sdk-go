@@ -77,7 +77,7 @@ Retrieves information about a single job.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for logging, tracing, authentication, etc.
-  **jobId** | **int32**|  | 
+  **jobId** | **int64**|  | 
 
 ### Return type
 

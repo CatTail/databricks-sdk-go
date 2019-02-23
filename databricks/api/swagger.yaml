@@ -141,6 +141,7 @@ paths:
         in: "query"
         required: true
         type: "integer"
+        format: "int64"
         x-exportParamName: "JobId"
       responses:
         200:
@@ -753,19 +754,23 @@ definitions:
     - "GENERAL_PURPOSE_SSD"
     - "THROUGHPUT_OPTIMIZED_HDD"
   JobsCreateRequest:
-    $ref: "#/definitions/JobSettings"
+    allOf:
+    - $ref: "#/definitions/JobSettings"
   JobsCreateResponse:
     properties:
       job_id:
         type: "integer"
+        format: "int64"
     example:
       job_id: 0
   JobsGetResponse:
-    $ref: "#/definitions/Job"
+    allOf:
+    - $ref: "#/definitions/Job"
   JobsResetRequest:
     properties:
       job_id:
         type: "integer"
+        format: "int64"
       new_settings:
         $ref: "#/definitions/JobSettings"
     example:
@@ -850,6 +855,7 @@ definitions:
     properties:
       job_id:
         type: "integer"
+        format: "int64"
     example:
       job_id: 0
   ClusterInstance:
@@ -884,12 +890,14 @@ definitions:
     properties:
       job_id:
         type: "integer"
+        format: "int64"
       creator_user_name:
         type: "string"
       settings:
         $ref: "#/definitions/JobSettings"
       created_time:
         type: "integer"
+        format: "int64"
   JobEmailNotifications:
     properties:
       on_start:
@@ -1036,7 +1044,8 @@ definitions:
       spark_submit_task:
         $ref: "#/definitions/SparkSubmitTask"
   NewCluster:
-    $ref: "#/definitions/ClustersCreateRequest"
+    allOf:
+    - $ref: "#/definitions/ClustersCreateRequest"
   NotebookOutput:
     properties:
       result:
@@ -1066,14 +1075,18 @@ definitions:
     properties:
       job_id:
         type: "integer"
+        format: "int64"
       run_id:
         type: "integer"
+        format: "int64"
       creator_user_name:
         type: "string"
       number_in_job:
         type: "integer"
+        format: "int64"
       original_attempt_run_id:
         type: "integer"
+        format: "int64"
       state:
         $ref: "#/definitions/RunState"
       schedule:
@@ -1088,12 +1101,16 @@ definitions:
         $ref: "#/definitions/RunParameters"
       start_time:
         type: "integer"
+        format: "int64"
       setup_duration:
         type: "integer"
+        format: "int64"
       execution_duration:
         type: "integer"
+        format: "int64"
       cleanup_duration:
         type: "integer"
+        format: "int64"
       trigger:
         $ref: "#/definitions/TriggerType"
   RunParameters:

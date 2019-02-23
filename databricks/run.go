@@ -11,15 +11,15 @@ package databricks
 
 type Run struct {
 
-	JobId int32 `json:"job_id,omitempty"`
+	JobId int64 `json:"job_id,omitempty"`
 
-	RunId int32 `json:"run_id,omitempty"`
+	RunId int64 `json:"run_id,omitempty"`
 
 	CreatorUserName string `json:"creator_user_name,omitempty"`
 
-	NumberInJob int32 `json:"number_in_job,omitempty"`
+	NumberInJob int64 `json:"number_in_job,omitempty"`
 
-	OriginalAttemptRunId int32 `json:"original_attempt_run_id,omitempty"`
+	OriginalAttemptRunId int64 `json:"original_attempt_run_id,omitempty"`
 
 	State *RunState `json:"state,omitempty"`
 
@@ -33,13 +33,13 @@ type Run struct {
 
 	OverridingParameters *RunParameters `json:"overriding_parameters,omitempty"`
 
-	StartTime int32 `json:"start_time,omitempty"`
+	StartTime int64 `json:"start_time,omitempty"`
 
-	SetupDuration int32 `json:"setup_duration,omitempty"`
+	SetupDuration int64 `json:"setup_duration,omitempty"`
 
-	ExecutionDuration int32 `json:"execution_duration,omitempty"`
+	ExecutionDuration int64 `json:"execution_duration,omitempty"`
 
-	CleanupDuration int32 `json:"cleanup_duration,omitempty"`
+	CleanupDuration int64 `json:"cleanup_duration,omitempty"`
 
 	Trigger *TriggerType `json:"trigger,omitempty"`
 }

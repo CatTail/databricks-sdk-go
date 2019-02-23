@@ -66,10 +66,8 @@ Class | Method | HTTP request | Description
  - [JobEmailNotifications](docs/JobEmailNotifications.md)
  - [JobSettings](docs/JobSettings.md)
  - [JobTask](docs/JobTask.md)
- - [JobsCreateRequest](docs/JobsCreateRequest.md)
  - [JobsCreateResponse](docs/JobsCreateResponse.md)
  - [JobsDeleteRequest](docs/JobsDeleteRequest.md)
- - [JobsGetResponse](docs/JobsGetResponse.md)
  - [JobsResetRequest](docs/JobsResetRequest.md)
  - [LibrariesInstallRequest](docs/LibrariesInstallRequest.md)
  - [LibrariesUninstallRequest](docs/LibrariesUninstallRequest.md)
@@ -77,7 +75,6 @@ Class | Method | HTTP request | Description
  - [LibraryFullStatus](docs/LibraryFullStatus.md)
  - [LibraryInstallStatus](docs/LibraryInstallStatus.md)
  - [MavenLibrary](docs/MavenLibrary.md)
- - [NewCluster](docs/NewCluster.md)
  - [NotebookOutput](docs/NotebookOutput.md)
  - [NotebookTask](docs/NotebookTask.md)
  - [ParamPair](docs/ParamPair.md)
@@ -110,6 +107,9 @@ Class | Method | HTTP request | Description
  - [WorkspaceObjectInfo](docs/WorkspaceObjectInfo.md)
  - [WorkspaceObjectType](docs/WorkspaceObjectType.md)
  - [ClustersGetResponse](docs/ClustersGetResponse.md)
+ - [JobsCreateRequest](docs/JobsCreateRequest.md)
+ - [JobsGetResponse](docs/JobsGetResponse.md)
+ - [NewCluster](docs/NewCluster.md)
 
 
 ## Documentation For Authorization

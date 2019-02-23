@@ -11,5 +11,5 @@ package databricks
 
 type JobsCreateResponse struct {
 
-	JobId int32 `json:"job_id,omitempty"`
+	JobId int64 `json:"job_id,omitempty"`
 }

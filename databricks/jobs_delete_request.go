@@ -11,5 +11,5 @@ package databricks
 
 type JobsDeleteRequest struct {
 
-	JobId int32 `json:"job_id"`
+	JobId int64 `json:"job_id"`
 }
