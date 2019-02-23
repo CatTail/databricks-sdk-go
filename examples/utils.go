@@ -13,19 +13,13 @@ import (
 
 var secrets = LoadSecrets()
 var client = GetClient()
-var ctx = GetContext()
+var ctx context.Context = nil
 
 func GetClient() *databricks.APIClient {
 	cfg := databricks.NewConfiguration()
+	cfg.AddDefaultHeader("Authorization", "Bearer " + secrets.Token)
 	cfg.BasePath = secrets.Domain + "/api/2.0"
 	return databricks.NewAPIClient(cfg)
-}
-
-func GetContext() context.Context {
-	return context.WithValue(context.Background(), databricks.ContextAPIKey, databricks.APIKey{
-		Key: secrets.Token,
-		Prefix: "Bearer",
-	})
 }
 
 type Secrets struct {
