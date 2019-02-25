@@ -580,11 +580,25 @@ definitions:
   ClustersClusterLogConf:
     properties:
       dbfs:
-        $ref: "#/definitions/ClustersDbfsStorageInfo"
-  ClustersDbfsStorageInfo:
-    properties:
-      destination:
-        type: string
+        properties:
+          destination:
+            type: string
+      s3:
+        properties:
+          destination:
+            type: string
+          region:
+            type: string
+          endpoint:
+            type: string
+          enable_encryption:
+            type: boolean
+          encryption_type:
+            type: string
+          kms_key:
+            type: string
+          canned_acl:
+            type: string
   ClustersClusterSource:
     type: string
     enum:

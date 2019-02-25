@@ -383,6 +383,14 @@ definitions:
       spark_conf:
         key: "spark_conf"
       cluster_log_conf:
+        s3:
+          encryption_type: "encryption_type"
+          enable_encryption: true
+          endpoint: "endpoint"
+          canned_acl: "canned_acl"
+          destination: "destination"
+          region: "region"
+          kms_key: "kms_key"
         dbfs:
           destination: "destination"
       cluster_name: "cluster_name"
@@ -467,6 +475,14 @@ definitions:
       spark_conf:
         key: "spark_conf"
       cluster_log_conf:
+        s3:
+          encryption_type: "encryption_type"
+          enable_encryption: true
+          endpoint: "endpoint"
+          canned_acl: "canned_acl"
+          destination: "destination"
+          region: "region"
+          kms_key: "kms_key"
         dbfs:
           destination: "destination"
       cluster_name: "cluster_name"
@@ -685,16 +701,20 @@ definitions:
   ClustersClusterLogConf:
     properties:
       dbfs:
-        $ref: "#/definitions/ClustersDbfsStorageInfo"
+        $ref: "#/definitions/ClustersClusterLogConf_dbfs"
+      s3:
+        $ref: "#/definitions/ClustersClusterLogConf_s3"
     example:
+      s3:
+        encryption_type: "encryption_type"
+        enable_encryption: true
+        endpoint: "endpoint"
+        canned_acl: "canned_acl"
+        destination: "destination"
+        region: "region"
+        kms_key: "kms_key"
       dbfs:
         destination: "destination"
-  ClustersDbfsStorageInfo:
-    properties:
-      destination:
-        type: "string"
-    example:
-      destination: "destination"
   ClustersClusterSource:
     type: "string"
     enum:
@@ -1409,6 +1429,36 @@ definitions:
         type: "string"
       message:
         type: "string"
+  ClustersClusterLogConf_dbfs:
+    properties:
+      destination:
+        type: "string"
+    example:
+      destination: "destination"
+  ClustersClusterLogConf_s3:
+    properties:
+      destination:
+        type: "string"
+      region:
+        type: "string"
+      endpoint:
+        type: "string"
+      enable_encryption:
+        type: "boolean"
+      encryption_type:
+        type: "string"
+      kms_key:
+        type: "string"
+      canned_acl:
+        type: "string"
+    example:
+      encryption_type: "encryption_type"
+      enable_encryption: true
+      endpoint: "endpoint"
+      canned_acl: "canned_acl"
+      destination: "destination"
+      region: "region"
+      kms_key: "kms_key"
 externalDocs:
   description: "The Databricks REST API 2.0 supports of a variety of services."
   url: "https://docs.databricks.com/api/latest/index.html"

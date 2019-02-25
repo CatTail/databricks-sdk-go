@@ -1,4 +1,4 @@
-# ClustersDbfsStorageInfo
+# ClustersClusterLogConfDbfs
 
 ## Properties
 Name | Type | Description | Notes

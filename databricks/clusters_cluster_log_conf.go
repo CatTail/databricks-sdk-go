@@ -11,5 +11,7 @@ package databricks
 
 type ClustersClusterLogConf struct {
 
-	Dbfs *ClustersDbfsStorageInfo `json:"dbfs,omitempty"`
+	Dbfs *ClustersClusterLogConfDbfs `json:"dbfs,omitempty"`
+
+	S3 *ClustersClusterLogConfS3 `json:"s3,omitempty"`
 }
