@@ -9,7 +9,7 @@
 
 package databricks
 
-type ClustersDbfsStorageInfo struct {
+type ClustersClusterLogConfDbfs struct {
 
 	Destination string `json:"destination,omitempty"`
 }
