@@ -21,7 +21,7 @@ Creates a new Spark cluster. This method acquires new instances from the cloud p
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for logging, tracing, authentication, etc.
-  **body** | [**ClustersCreateRequest**](ClustersCreateRequest.md)|  | 
+  **body** | [**NewCluster**](NewCluster.md)|  | 
 
 ### Return type
 

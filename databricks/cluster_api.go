@@ -31,7 +31,7 @@ type ClusterApiService service
  * @param ctx context.Context for authentication, logging, tracing, etc.
  @param body 
  @return ClustersCreateResponse*/
-func (a *ClusterApiService) CreateCluster(ctx context.Context, body ClustersCreateRequest) (ClustersCreateResponse,  *http.Response, error) {
+func (a *ClusterApiService) CreateCluster(ctx context.Context, body NewCluster) (ClustersCreateResponse,  *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody interface{}
