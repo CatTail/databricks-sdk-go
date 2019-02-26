@@ -13,7 +13,7 @@ type RunParameters struct {
 
 	JarParams []string `json:"jar_params,omitempty"`
 
-	NotebookParams []ParamPair `json:"notebook_params,omitempty"`
+	NotebookParams []map[string]string `json:"notebook_params,omitempty"`
 
 	PythonParams []string `json:"python_params,omitempty"`
 

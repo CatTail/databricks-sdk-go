@@ -685,8 +685,8 @@ definitions:
         notebook_task:
           notebook_path: "notebook_path"
           base_parameters:
-          - {}
-          - {}
+          - key: "base_parameters"
+          - key: "base_parameters"
         spark_python_task:
           python_file: "python_file"
           parameters:
@@ -849,8 +849,8 @@ definitions:
         notebook_task:
           notebook_path: "notebook_path"
           base_parameters:
-          - {}
-          - {}
+          - key: "base_parameters"
+          - key: "base_parameters"
         spark_python_task:
           python_file: "python_file"
           parameters:
@@ -1027,8 +1027,8 @@ definitions:
       notebook_task:
         notebook_path: "notebook_path"
         base_parameters:
-        - {}
-        - {}
+        - key: "base_parameters"
+        - key: "base_parameters"
       spark_python_task:
         python_file: "python_file"
         parameters:
@@ -1159,16 +1159,14 @@ definitions:
       base_parameters:
         type: "array"
         items:
-          $ref: "#/definitions/ParamPair"
+          type: "object"
+          additionalProperties:
+            type: "string"
     example:
       notebook_path: "notebook_path"
       base_parameters:
-      - {}
-      - {}
-  ParamPair:
-    type: "object"
-    additionalProperties:
-      type: "string"
+      - key: "base_parameters"
+      - key: "base_parameters"
   Run:
     properties:
       job_id:
@@ -1220,7 +1218,9 @@ definitions:
       notebook_params:
         type: "array"
         items:
-          $ref: "#/definitions/ParamPair"
+          type: "object"
+          additionalProperties:
+            type: "string"
       python_params:
         type: "array"
         items:

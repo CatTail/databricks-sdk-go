@@ -76,7 +76,6 @@ Class | Method | HTTP request | Description
  - [NewCluster](docs/NewCluster.md)
  - [NotebookOutput](docs/NotebookOutput.md)
  - [NotebookTask](docs/NotebookTask.md)
- - [ParamPair](docs/ParamPair.md)
  - [PythonPyPiLibrary](docs/PythonPyPiLibrary.md)
  - [RCranLibrary](docs/RCranLibrary.md)
  - [Run](docs/Run.md)

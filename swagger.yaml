@@ -638,11 +638,9 @@ definitions:
       base_parameters:
         type: array
         items:
-          $ref: "#/definitions/ParamPair"
-  ParamPair:
-    type: object
-    additionalProperties:
-      type: string
+          type: object
+          additionalProperties:
+            type: string
   Run:
     properties:
       job_id:
@@ -694,7 +692,9 @@ definitions:
       notebook_params:
         type: array
         items:
-          $ref: "#/definitions/ParamPair"
+          type: object
+          additionalProperties:
+            type: string
       python_params:
         type: array
         items:
