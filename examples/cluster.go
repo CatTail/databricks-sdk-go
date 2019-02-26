@@ -13,7 +13,7 @@ const (
 )
 
 func CreateCluster() databricks.ClustersCreateResponse {
-	res, _, err := client.ClusterApi.CreateCluster(ctx, databricks.ClustersCreateRequest{
+	res, _, err := client.ClusterApi.CreateCluster(ctx, databricks.NewCluster{
 		ClusterName:  ClusterName,
 		SparkVersion: SparkVersion,
 		NodeTypeId:   NodeTypeId,

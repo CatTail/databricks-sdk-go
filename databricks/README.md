@@ -47,7 +47,6 @@ Class | Method | HTTP request | Description
  - [ClustersClusterLogConfS3](docs/ClustersClusterLogConfS3.md)
  - [ClustersClusterSource](docs/ClustersClusterSource.md)
  - [ClustersClusterState](docs/ClustersClusterState.md)
- - [ClustersCreateRequest](docs/ClustersCreateRequest.md)
  - [ClustersCreateResponse](docs/ClustersCreateResponse.md)
  - [ClustersDeleteRequest](docs/ClustersDeleteRequest.md)
  - [ClustersEbsVolumeType](docs/ClustersEbsVolumeType.md)
@@ -76,6 +75,7 @@ Class | Method | HTTP request | Description
  - [LibraryFullStatus](docs/LibraryFullStatus.md)
  - [LibraryInstallStatus](docs/LibraryInstallStatus.md)
  - [MavenLibrary](docs/MavenLibrary.md)
+ - [NewCluster](docs/NewCluster.md)
  - [NotebookOutput](docs/NotebookOutput.md)
  - [NotebookTask](docs/NotebookTask.md)
  - [ParamPair](docs/ParamPair.md)
@@ -110,7 +110,6 @@ Class | Method | HTTP request | Description
  - [ClustersGetResponse](docs/ClustersGetResponse.md)
  - [JobsCreateRequest](docs/JobsCreateRequest.md)
  - [JobsGetResponse](docs/JobsGetResponse.md)
- - [NewCluster](docs/NewCluster.md)
 
 
 ## Documentation For Authorization

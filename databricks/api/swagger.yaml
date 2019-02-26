@@ -50,7 +50,7 @@ paths:
         name: "body"
         required: true
         schema:
-          $ref: "#/definitions/ClustersCreateRequest"
+          $ref: "#/definitions/NewCluster"
         x-exportParamName: "Body"
       responses:
         200:
@@ -336,89 +336,6 @@ definitions:
         type: "string"
       language:
         $ref: "#/definitions/WorkspaceLanguage"
-  ClustersCreateRequest:
-    required:
-    - "node_type_id"
-    - "spark_version"
-    properties:
-      num_workers:
-        type: "integer"
-        format: "int32"
-      autoscale:
-        $ref: "#/definitions/ClustersAutoScale"
-      cluster_name:
-        type: "string"
-      spark_version:
-        type: "string"
-      spark_conf:
-        type: "object"
-        additionalProperties:
-          type: "string"
-      aws_attributes:
-        $ref: "#/definitions/ClustersAwsAttributes"
-      node_type_id:
-        type: "string"
-      driver_node_type_id:
-        type: "string"
-      ssh_public_keys:
-        type: "array"
-        items:
-          type: "string"
-      custom_tags:
-        type: "object"
-        additionalProperties:
-          type: "string"
-      cluster_log_conf:
-        $ref: "#/definitions/ClustersClusterLogConf"
-      spark_env_vars:
-        type: "object"
-        additionalProperties:
-          type: "string"
-      autotermination_minutes:
-        type: "integer"
-        format: "int32"
-      enable_elastic_disk:
-        type: "boolean"
-    example:
-      spark_conf:
-        key: "spark_conf"
-      cluster_log_conf:
-        s3:
-          encryption_type: "encryption_type"
-          enable_encryption: true
-          endpoint: "endpoint"
-          canned_acl: "canned_acl"
-          destination: "destination"
-          region: "region"
-          kms_key: "kms_key"
-        dbfs:
-          destination: "destination"
-      cluster_name: "cluster_name"
-      enable_elastic_disk: true
-      spark_env_vars:
-        key: "spark_env_vars"
-      node_type_id: "node_type_id"
-      ssh_public_keys:
-      - "ssh_public_keys"
-      - "ssh_public_keys"
-      custom_tags:
-        key: "custom_tags"
-      num_workers: 0
-      autoscale:
-        max_workers: 1
-        min_workers: 6
-      aws_attributes:
-        ebs_volume_count: 2
-        zone_id: "zone_id"
-        ebs_volume_size: 7
-        spot_bid_price_percent: 5
-        availability: {}
-        ebs_volume_type: {}
-        first_on_demand: 5
-        instance_profile_arn: "instance_profile_arn"
-      spark_version: "spark_version"
-      autotermination_minutes: 9
-      driver_node_type_id: "driver_node_type_id"
   ClustersCreateResponse:
     properties:
       cluster_id:
@@ -796,7 +713,46 @@ definitions:
     example:
       job_id: 0
       new_settings:
-        new_cluster: ""
+        new_cluster:
+          spark_conf:
+            key: "spark_conf"
+          cluster_log_conf:
+            s3:
+              encryption_type: "encryption_type"
+              enable_encryption: true
+              endpoint: "endpoint"
+              canned_acl: "canned_acl"
+              destination: "destination"
+              region: "region"
+              kms_key: "kms_key"
+            dbfs:
+              destination: "destination"
+          cluster_name: "cluster_name"
+          enable_elastic_disk: true
+          spark_env_vars:
+            key: "spark_env_vars"
+          node_type_id: "node_type_id"
+          ssh_public_keys:
+          - "ssh_public_keys"
+          - "ssh_public_keys"
+          custom_tags:
+            key: "custom_tags"
+          num_workers: 0
+          autoscale:
+            max_workers: 1
+            min_workers: 6
+          aws_attributes:
+            ebs_volume_count: 2
+            zone_id: "zone_id"
+            ebs_volume_size: 7
+            spot_bid_price_percent: 5
+            availability: {}
+            ebs_volume_type: {}
+            first_on_demand: 5
+            instance_profile_arn: "instance_profile_arn"
+          spark_version: "spark_version"
+          autotermination_minutes: 9
+          driver_node_type_id: "driver_node_type_id"
         max_retries: 1
         min_retry_interval_millis: 5
         max_concurrent_runs: 5
@@ -980,7 +936,46 @@ definitions:
       max_concurrent_runs:
         type: "integer"
     example:
-      new_cluster: ""
+      new_cluster:
+        spark_conf:
+          key: "spark_conf"
+        cluster_log_conf:
+          s3:
+            encryption_type: "encryption_type"
+            enable_encryption: true
+            endpoint: "endpoint"
+            canned_acl: "canned_acl"
+            destination: "destination"
+            region: "region"
+            kms_key: "kms_key"
+          dbfs:
+            destination: "destination"
+        cluster_name: "cluster_name"
+        enable_elastic_disk: true
+        spark_env_vars:
+          key: "spark_env_vars"
+        node_type_id: "node_type_id"
+        ssh_public_keys:
+        - "ssh_public_keys"
+        - "ssh_public_keys"
+        custom_tags:
+          key: "custom_tags"
+        num_workers: 0
+        autoscale:
+          max_workers: 1
+          min_workers: 6
+        aws_attributes:
+          ebs_volume_count: 2
+          zone_id: "zone_id"
+          ebs_volume_size: 7
+          spot_bid_price_percent: 5
+          availability: {}
+          ebs_volume_type: {}
+          first_on_demand: 5
+          instance_profile_arn: "instance_profile_arn"
+        spark_version: "spark_version"
+        autotermination_minutes: 9
+        driver_node_type_id: "driver_node_type_id"
       max_retries: 1
       min_retry_interval_millis: 5
       max_concurrent_runs: 5
@@ -1064,8 +1059,88 @@ definitions:
       spark_submit_task:
         $ref: "#/definitions/SparkSubmitTask"
   NewCluster:
-    allOf:
-    - $ref: "#/definitions/ClustersCreateRequest"
+    required:
+    - "node_type_id"
+    - "spark_version"
+    properties:
+      num_workers:
+        type: "integer"
+        format: "int32"
+      autoscale:
+        $ref: "#/definitions/ClustersAutoScale"
+      cluster_name:
+        type: "string"
+      spark_version:
+        type: "string"
+      spark_conf:
+        type: "object"
+        additionalProperties:
+          type: "string"
+      aws_attributes:
+        $ref: "#/definitions/ClustersAwsAttributes"
+      node_type_id:
+        type: "string"
+      driver_node_type_id:
+        type: "string"
+      ssh_public_keys:
+        type: "array"
+        items:
+          type: "string"
+      custom_tags:
+        type: "object"
+        additionalProperties:
+          type: "string"
+      cluster_log_conf:
+        $ref: "#/definitions/ClustersClusterLogConf"
+      spark_env_vars:
+        type: "object"
+        additionalProperties:
+          type: "string"
+      autotermination_minutes:
+        type: "integer"
+        format: "int32"
+      enable_elastic_disk:
+        type: "boolean"
+    example:
+      spark_conf:
+        key: "spark_conf"
+      cluster_log_conf:
+        s3:
+          encryption_type: "encryption_type"
+          enable_encryption: true
+          endpoint: "endpoint"
+          canned_acl: "canned_acl"
+          destination: "destination"
+          region: "region"
+          kms_key: "kms_key"
+        dbfs:
+          destination: "destination"
+      cluster_name: "cluster_name"
+      enable_elastic_disk: true
+      spark_env_vars:
+        key: "spark_env_vars"
+      node_type_id: "node_type_id"
+      ssh_public_keys:
+      - "ssh_public_keys"
+      - "ssh_public_keys"
+      custom_tags:
+        key: "custom_tags"
+      num_workers: 0
+      autoscale:
+        max_workers: 1
+        min_workers: 6
+      aws_attributes:
+        ebs_volume_count: 2
+        zone_id: "zone_id"
+        ebs_volume_size: 7
+        spot_bid_price_percent: 5
+        availability: {}
+        ebs_volume_type: {}
+        first_on_demand: 5
+        instance_profile_arn: "instance_profile_arn"
+      spark_version: "spark_version"
+      autotermination_minutes: 9
+      driver_node_type_id: "driver_node_type_id"
   NotebookOutput:
     properties:
       result:
