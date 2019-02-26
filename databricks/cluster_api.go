@@ -109,7 +109,7 @@ func (a *ClusterApiService) CreateCluster(ctx context.Context, body NewCluster) 
  * @param ctx context.Context for authentication, logging, tracing, etc.
  @param body 
  @return */
-func (a *ClusterApiService) EditCluster(ctx context.Context, body ClustersEditRequest) ( *http.Response, error) {
+func (a *ClusterApiService) EditCluster(ctx context.Context, body NewCluster) ( *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody interface{}

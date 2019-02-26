@@ -3,6 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClusterId** | **string** |  | [optional] [default to null]
 **NumWorkers** | **int32** |  | [optional] [default to null]
 **Autoscale** | [***ClustersAutoScale**](ClustersAutoScale.md) |  | [optional] [default to null]
 **ClusterName** | **string** |  | [optional] [default to null]

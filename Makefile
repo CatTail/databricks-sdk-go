@@ -1,3 +1,5 @@
+default: build build-examples
+
 build: bin/swagger-codegen-cli.jar clean
 	java -jar bin/swagger-codegen-cli.jar generate -i swagger.yaml -l go -c config.json -o databricks
 

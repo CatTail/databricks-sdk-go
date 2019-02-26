@@ -11,6 +11,8 @@ package databricks
 
 type NewCluster struct {
 
+	ClusterId string `json:"cluster_id,omitempty"`
+
 	NumWorkers int32 `json:"num_workers,omitempty"`
 
 	Autoscale *ClustersAutoScale `json:"autoscale,omitempty"`

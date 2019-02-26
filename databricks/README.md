@@ -50,7 +50,6 @@ Class | Method | HTTP request | Description
  - [ClustersCreateResponse](docs/ClustersCreateResponse.md)
  - [ClustersDeleteRequest](docs/ClustersDeleteRequest.md)
  - [ClustersEbsVolumeType](docs/ClustersEbsVolumeType.md)
- - [ClustersEditRequest](docs/ClustersEditRequest.md)
  - [ClustersGetRequest](docs/ClustersGetRequest.md)
  - [ClustersListResponse](docs/ClustersListResponse.md)
  - [ClustersLogSyncStatus](docs/ClustersLogSyncStatus.md)
