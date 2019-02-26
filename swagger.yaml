@@ -65,7 +65,8 @@ paths:
         200:
           description:
           schema:
-            $ref: "#/definitions/ClustersGetResponse"
+            # TODO: this response is slightly different w.r.t. ClusterInfo
+            $ref: "#/definitions/ClustersClusterInfo"
   /clusters/edit:
     post:
       tags:
@@ -110,7 +111,7 @@ paths:
           name: "body"
           required: true
           schema:
-            $ref: "#/definitions/JobsCreateRequest"
+            $ref: "#/definitions/JobSettings"
       responses:
         200:
           description:
@@ -132,7 +133,7 @@ paths:
         200:
           description:
           schema:
-            $ref: "#/definitions/JobsGetResponse"
+            $ref: "#/definitions/Job"
   /jobs/reset:
     post:
       tags:
@@ -195,121 +196,6 @@ paths:
         200:
           description:
 definitions:
-  ### Workspace ###
-  # Requests and responses
-  WorkspaceDeleteRequest:
-    required:
-      - path
-    properties:
-      path:
-        type: string
-      recursive:
-        type: boolean
-  WorkspaceExportRequest:
-    required:
-      - path
-    properties:
-      path:
-        type: string
-      format:
-        $ref: "#/definitions/WorkspaceExportFormat"
-      direct_download:
-        type: boolean
-  WorkspaceExportResponse:
-    properties:
-      content:
-        type: string
-        format: byte
-  WorkspaceGetStatusRequest:
-    required:
-      - path
-    properties:
-      path:
-        type: string
-  WorkspaceGetStatusResponse:
-    properties:
-      object_type:
-        $ref: "#/definitions/WorkspaceObjectType"
-      path:
-        type: string
-      language:
-        $ref: "#/definitions/WorkspaceLanguage"
-  WorkspaceImportRequest:
-    required:
-      - path
-    properties:
-      path:
-        type: string
-      format:
-        $ref: "#/definitions/WorkspaceExportFormat"
-      language:
-        $ref: "#/definitions/WorkspaceLanguage"
-      content:
-        type: string
-        format: byte
-      overwrite:
-        type: boolean
-  WorkspaceListRequest:
-    required:
-      - path
-    properties:
-      path:
-        type: string
-  WorkspaceListResponse:
-    properties:
-      objects:
-        type: array
-        items:
-          $ref: "#/definitions/WorkspaceObjectInfo"
-  WorkspaceMkdirsRequest:
-    required:
-      - path
-    properties:
-      path:
-        type: string
-  # Data Structures
-  WorkspaceObjectType:
-    type: string
-    default: NOTEBOOK
-    enum:
-      - NOTEBOOK
-      - DIRECTORY
-      - LIBRARY
-  WorkspaceExportFormat:
-    type: string
-    default: SOURCE
-    enum:
-      - SOURCE
-      - HTML
-      - JUPYTER
-      - DBC
-  WorkspaceLanguage:
-    type: string
-    default: SCALA
-    enum:
-      - SCALA
-      - PYTHON
-      - SQL
-      - R
-  WorkspaceObject:
-    required:
-      - path
-      - object_type
-    properties:
-      path:
-        type: string
-      language:
-        $ref: "#/definitions/WorkspaceLanguage"
-      object_type:
-        $ref: "#/definitions/WorkspaceObjectType"
-  WorkspaceObjectInfo:
-    properties:
-      object_type:
-        $ref: "#/definitions/WorkspaceObjectType"
-      path:
-        type: string
-      language:
-        $ref: "#/definitions/WorkspaceLanguage"
   ### Clusters ###
   # Requests and responses
   ClustersCreateResponse:
@@ -340,16 +226,6 @@ definitions:
     properties:
       cluster_id:
         type: string
-  ClustersGetRequest:
-    required:
-      - cluster_id
-    properties:
-      cluster_id:
-        type: string
-  ClustersGetResponse:
-    allOf:
-      # TODO: this response is slightly different w.r.t. ClusterInfo
-      - $ref: "#/definitions/ClustersClusterInfo"
   ClustersListResponse:
     properties:
       clusters:
@@ -585,17 +461,11 @@ definitions:
       - THROUGHPUT_OPTIMIZED_HDD
   ### Jobs ###
   # Requests and responses
-  JobsCreateRequest:
-    allOf:
-      - $ref: "#/definitions/JobSettings"
   JobsCreateResponse:
     properties:
       job_id:
         type: integer
         format: int64
-  JobsGetResponse:
-    allOf:
-      - $ref: "#/definitions/Job"
   JobsResetRequest:
     properties:
       job_id:

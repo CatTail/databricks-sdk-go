@@ -180,14 +180,14 @@ func (a *ClusterApiService) EditCluster(ctx context.Context, body NewCluster) ( 
  Retrieves the information for a cluster given its identifier. Clusters can be described while they are running, or up to 30 days after they are terminated.
  * @param ctx context.Context for authentication, logging, tracing, etc.
  @param clusterId 
- @return ClustersGetResponse*/
-func (a *ClusterApiService) GetCluster(ctx context.Context, clusterId string) (ClustersGetResponse,  *http.Response, error) {
+ @return ClustersClusterInfo*/
+func (a *ClusterApiService) GetCluster(ctx context.Context, clusterId string) (ClustersClusterInfo,  *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody interface{}
 		localVarFileName string
 		localVarFileBytes []byte
-	 	successPayload  ClustersGetResponse
+	 	successPayload  ClustersClusterInfo
 	)
 
 	// create path and map variables

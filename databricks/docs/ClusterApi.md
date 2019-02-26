@@ -67,7 +67,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetCluster**
-> ClustersGetResponse GetCluster(ctx, clusterId)
+> ClustersClusterInfo GetCluster(ctx, clusterId)
 
 
 Retrieves the information for a cluster given its identifier. Clusters can be described while they are running, or up to 30 days after they are terminated.
@@ -81,7 +81,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ClustersGetResponse**](ClustersGetResponse.md)
+[**ClustersClusterInfo**](ClustersClusterInfo.md)
 
 ### Authorization
 

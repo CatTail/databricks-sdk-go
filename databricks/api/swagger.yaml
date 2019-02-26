@@ -75,7 +75,7 @@ paths:
         200:
           description: "null"
           schema:
-            $ref: "#/definitions/ClustersGetResponse"
+            $ref: "#/definitions/ClustersClusterInfo"
   /clusters/edit:
     post:
       tags:
@@ -123,7 +123,7 @@ paths:
         name: "body"
         required: true
         schema:
-          $ref: "#/definitions/JobsCreateRequest"
+          $ref: "#/definitions/JobSettings"
         x-exportParamName: "Body"
       responses:
         200:
@@ -147,7 +147,7 @@ paths:
         200:
           description: "null"
           schema:
-            $ref: "#/definitions/JobsGetResponse"
+            $ref: "#/definitions/Job"
   /jobs/reset:
     post:
       tags:
@@ -222,120 +222,6 @@ securityDefinitions:
     name: "Authorization"
     in: "header"
 definitions:
-  WorkspaceDeleteRequest:
-    required:
-    - "path"
-    properties:
-      path:
-        type: "string"
-      recursive:
-        type: "boolean"
-  WorkspaceExportRequest:
-    required:
-    - "path"
-    properties:
-      path:
-        type: "string"
-      format:
-        $ref: "#/definitions/WorkspaceExportFormat"
-      direct_download:
-        type: "boolean"
-  WorkspaceExportResponse:
-    properties:
-      content:
-        type: "string"
-        format: "byte"
-        pattern: "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
-  WorkspaceGetStatusRequest:
-    required:
-    - "path"
-    properties:
-      path:
-        type: "string"
-  WorkspaceGetStatusResponse:
-    properties:
-      object_type:
-        $ref: "#/definitions/WorkspaceObjectType"
-      path:
-        type: "string"
-      language:
-        $ref: "#/definitions/WorkspaceLanguage"
-  WorkspaceImportRequest:
-    required:
-    - "path"
-    properties:
-      path:
-        type: "string"
-      format:
-        $ref: "#/definitions/WorkspaceExportFormat"
-      language:
-        $ref: "#/definitions/WorkspaceLanguage"
-      content:
-        type: "string"
-        format: "byte"
-        pattern: "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
-      overwrite:
-        type: "boolean"
-  WorkspaceListRequest:
-    required:
-    - "path"
-    properties:
-      path:
-        type: "string"
-  WorkspaceListResponse:
-    properties:
-      objects:
-        type: "array"
-        items:
-          $ref: "#/definitions/WorkspaceObjectInfo"
-  WorkspaceMkdirsRequest:
-    required:
-    - "path"
-    properties:
-      path:
-        type: "string"
-  WorkspaceObjectType:
-    type: "string"
-    enum:
-    - "NOTEBOOK"
-    - "DIRECTORY"
-    - "LIBRARY"
-    default: "NOTEBOOK"
-  WorkspaceExportFormat:
-    type: "string"
-    enum:
-    - "SOURCE"
-    - "HTML"
-    - "JUPYTER"
-    - "DBC"
-    default: "SOURCE"
-  WorkspaceLanguage:
-    type: "string"
-    enum:
-    - "SCALA"
-    - "PYTHON"
-    - "SQL"
-    - "R"
-    default: "SCALA"
-  WorkspaceObject:
-    required:
-    - "object_type"
-    - "path"
-    properties:
-      path:
-        type: "string"
-      language:
-        $ref: "#/definitions/WorkspaceLanguage"
-      object_type:
-        $ref: "#/definitions/WorkspaceObjectType"
-  WorkspaceObjectInfo:
-    properties:
-      object_type:
-        $ref: "#/definitions/WorkspaceObjectType"
-      path:
-        type: "string"
-      language:
-        $ref: "#/definitions/WorkspaceLanguage"
   ClustersCreateResponse:
     properties:
       cluster_id:
@@ -368,15 +254,6 @@ definitions:
         type: "string"
     example:
       cluster_id: "cluster_id"
-  ClustersGetRequest:
-    required:
-    - "cluster_id"
-    properties:
-      cluster_id:
-        type: "string"
-  ClustersGetResponse:
-    allOf:
-    - $ref: "#/definitions/ClustersClusterInfo"
   ClustersListResponse:
     properties:
       clusters:
@@ -471,6 +348,88 @@ definitions:
         $ref: "#/definitions/ClustersLogSyncStatus"
       termination_reason:
         $ref: "#/definitions/ClustersTerminationReason"
+    example:
+      spark_conf:
+        key: "spark_conf"
+      enable_elastic_disk: true
+      cluster_source: {}
+      jdbc_port: 5
+      cluster_log_status:
+        last_exception: "last_exception"
+        last_attempted: 7
+      num_workers: 0
+      terminated_time: 7
+      cluster_id: "cluster_id"
+      aws_attributes:
+        ebs_volume_count: 2
+        zone_id: "zone_id"
+        ebs_volume_size: 7
+        spot_bid_price_percent: 5
+        availability: {}
+        ebs_volume_type: {}
+        first_on_demand: 5
+        instance_profile_arn: "instance_profile_arn"
+      creator_user_name: "creator_user_name"
+      cluster_memory_mb: 2
+      last_state_loss_time: 9
+      spark_context_id: 1
+      state: {}
+      state_message: "state_message"
+      cluster_log_conf:
+        s3:
+          encryption_type: "encryption_type"
+          enable_encryption: true
+          endpoint: "endpoint"
+          canned_acl: "canned_acl"
+          destination: "destination"
+          region: "region"
+          kms_key: "kms_key"
+        dbfs:
+          destination: "destination"
+      cluster_name: "cluster_name"
+      spark_env_vars:
+        key: "spark_env_vars"
+      node_type_id: "node_type_id"
+      ssh_public_keys:
+      - "ssh_public_keys"
+      - "ssh_public_keys"
+      termination_reason:
+        code: {}
+        parameters:
+          key: "parameters"
+      default_tags:
+        key: "default_tags"
+      custom_tags:
+        key: "custom_tags"
+      autoscale:
+        max_workers: 1
+        min_workers: 6
+      cluster_cores: 4.145608
+      start_time: 2
+      last_activity_time: 3
+      driver:
+        instance_id: "instance_id"
+        start_timestamp: 6
+        public_dns: "public_dns"
+        private_ip: "private_ip"
+        host_private_ip: "host_private_ip"
+        node_id: "node_id"
+      executors:
+      - instance_id: "instance_id"
+        start_timestamp: 6
+        public_dns: "public_dns"
+        private_ip: "private_ip"
+        host_private_ip: "host_private_ip"
+        node_id: "node_id"
+      - instance_id: "instance_id"
+        start_timestamp: 6
+        public_dns: "public_dns"
+        private_ip: "private_ip"
+        host_private_ip: "host_private_ip"
+        node_id: "node_id"
+      spark_version: "spark_version"
+      autotermination_minutes: 5
+      driver_node_type_id: "driver_node_type_id"
   ClustersAutoScale:
     properties:
       min_workers:
@@ -528,6 +487,13 @@ definitions:
         format: "int64"
       host_private_ip:
         type: "string"
+    example:
+      instance_id: "instance_id"
+      start_timestamp: 6
+      public_dns: "public_dns"
+      private_ip: "private_ip"
+      host_private_ip: "host_private_ip"
+      node_id: "node_id"
   ClustersClusterLogConf:
     properties:
       dbfs:
@@ -569,6 +535,9 @@ definitions:
         format: "int64"
       last_exception:
         type: "string"
+    example:
+      last_exception: "last_exception"
+      last_attempted: 7
   ClustersTerminationReason:
     properties:
       code:
@@ -577,6 +546,10 @@ definitions:
         type: "object"
         additionalProperties:
           type: "string"
+    example:
+      code: {}
+      parameters:
+        key: "parameters"
   ClustersTerminationCode:
     type: "string"
     enum:
@@ -603,9 +576,6 @@ definitions:
     enum:
     - "GENERAL_PURPOSE_SSD"
     - "THROUGHPUT_OPTIMIZED_HDD"
-  JobsCreateRequest:
-    allOf:
-    - $ref: "#/definitions/JobSettings"
   JobsCreateResponse:
     properties:
       job_id:
@@ -613,9 +583,6 @@ definitions:
         format: "int64"
     example:
       job_id: 0
-  JobsGetResponse:
-    allOf:
-    - $ref: "#/definitions/Job"
   JobsResetRequest:
     properties:
       job_id:
@@ -667,8 +634,8 @@ definitions:
           spark_version: "spark_version"
           autotermination_minutes: 9
           driver_node_type_id: "driver_node_type_id"
-        max_retries: 1
-        min_retry_interval_millis: 5
+        max_retries: 6
+        min_retry_interval_millis: 1
         max_concurrent_runs: 5
         libraries:
         - cran:
@@ -738,7 +705,7 @@ definitions:
           - "on_success"
           - "on_success"
         existing_cluster_id: "existing_cluster_id"
-        timeout_seconds: 6
+        timeout_seconds: 0
   JobsDeleteRequest:
     required:
     - "job_id"
@@ -788,6 +755,124 @@ definitions:
       created_time:
         type: "integer"
         format: "int64"
+    example:
+      settings:
+        new_cluster:
+          spark_conf:
+            key: "spark_conf"
+          cluster_log_conf:
+            s3:
+              encryption_type: "encryption_type"
+              enable_encryption: true
+              endpoint: "endpoint"
+              canned_acl: "canned_acl"
+              destination: "destination"
+              region: "region"
+              kms_key: "kms_key"
+            dbfs:
+              destination: "destination"
+          cluster_name: "cluster_name"
+          enable_elastic_disk: true
+          spark_env_vars:
+            key: "spark_env_vars"
+          node_type_id: "node_type_id"
+          ssh_public_keys:
+          - "ssh_public_keys"
+          - "ssh_public_keys"
+          custom_tags:
+            key: "custom_tags"
+          num_workers: 0
+          autoscale:
+            max_workers: 1
+            min_workers: 6
+          cluster_id: "cluster_id"
+          aws_attributes:
+            ebs_volume_count: 2
+            zone_id: "zone_id"
+            ebs_volume_size: 7
+            spot_bid_price_percent: 5
+            availability: {}
+            ebs_volume_type: {}
+            first_on_demand: 5
+            instance_profile_arn: "instance_profile_arn"
+          spark_version: "spark_version"
+          autotermination_minutes: 9
+          driver_node_type_id: "driver_node_type_id"
+        max_retries: 6
+        min_retry_interval_millis: 1
+        max_concurrent_runs: 5
+        libraries:
+        - cran:
+            package: "package"
+            repo: "repo"
+          egg: "egg"
+          pypi:
+            package: "package"
+            repo: "repo"
+          maven:
+            repo: "repo"
+            coordinates: "coordinates"
+            exclusions:
+            - "exclusions"
+            - "exclusions"
+          jar: "jar"
+          whl: "whl"
+        - cran:
+            package: "package"
+            repo: "repo"
+          egg: "egg"
+          pypi:
+            package: "package"
+            repo: "repo"
+          maven:
+            repo: "repo"
+            coordinates: "coordinates"
+            exclusions:
+            - "exclusions"
+            - "exclusions"
+          jar: "jar"
+          whl: "whl"
+        retry_on_timeout: true
+        spark_submit_task:
+          parameters:
+          - "parameters"
+          - "parameters"
+        spark_jar_task:
+          jar_uri: "jar_uri"
+          parameters:
+          - "parameters"
+          - "parameters"
+          main_class_name: "main_class_name"
+        schedule:
+          quartz_cron_expression: "quartz_cron_expression"
+          timezone_id: "timezone_id"
+        notebook_task:
+          notebook_path: "notebook_path"
+          base_parameters:
+          - {}
+          - {}
+        spark_python_task:
+          python_file: "python_file"
+          parameters:
+          - "parameters"
+          - "parameters"
+        name: "name"
+        email_notifications:
+          on_failure:
+          - "on_failure"
+          - "on_failure"
+          no_alert_for_skipped_runs: true
+          on_start:
+          - "on_start"
+          - "on_start"
+          on_success:
+          - "on_success"
+          - "on_success"
+        existing_cluster_id: "existing_cluster_id"
+        timeout_seconds: 0
+      created_time: 6
+      creator_user_name: "creator_user_name"
+      job_id: 0
   JobEmailNotifications:
     properties:
       on_start:
@@ -891,8 +976,8 @@ definitions:
         spark_version: "spark_version"
         autotermination_minutes: 9
         driver_node_type_id: "driver_node_type_id"
-      max_retries: 1
-      min_retry_interval_millis: 5
+      max_retries: 6
+      min_retry_interval_millis: 1
       max_concurrent_runs: 5
       libraries:
       - cran:
@@ -962,7 +1047,7 @@ definitions:
         - "on_success"
         - "on_success"
       existing_cluster_id: "existing_cluster_id"
-      timeout_seconds: 6
+      timeout_seconds: 0
   JobTask:
     properties:
       notebook_task:

@@ -26,7 +26,7 @@ func CreateCluster() databricks.ClustersCreateResponse {
 	return res
 }
 
-func GetCluster(clusterId string) databricks.ClustersGetResponse {
+func GetCluster(clusterId string) databricks.ClustersClusterInfo {
 	res, _, err := client.ClusterApi.GetCluster(ctx, clusterId)
 	if err != nil {
 		panic(err)

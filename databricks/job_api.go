@@ -31,7 +31,7 @@ type JobApiService service
  * @param ctx context.Context for authentication, logging, tracing, etc.
  @param body 
  @return JobsCreateResponse*/
-func (a *JobApiService) CreateJob(ctx context.Context, body JobsCreateRequest) (JobsCreateResponse,  *http.Response, error) {
+func (a *JobApiService) CreateJob(ctx context.Context, body JobSettings) (JobsCreateResponse,  *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody interface{}
@@ -180,14 +180,14 @@ func (a *JobApiService) DeleteJob(ctx context.Context, body JobsDeleteRequest) (
  Retrieves information about a single job.
  * @param ctx context.Context for authentication, logging, tracing, etc.
  @param jobId 
- @return JobsGetResponse*/
-func (a *JobApiService) GetJob(ctx context.Context, jobId int64) (JobsGetResponse,  *http.Response, error) {
+ @return Job*/
+func (a *JobApiService) GetJob(ctx context.Context, jobId int64) (Job,  *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody interface{}
 		localVarFileName string
 		localVarFileBytes []byte
-	 	successPayload  JobsGetResponse
+	 	successPayload  Job
 	)
 
 	// create path and map variables
