@@ -5,7 +5,7 @@ import (
 )
 
 func CreateJob(clusterId string) databricks.JobsCreateResponse {
-	res, _, err := client.JobApi.CreateJob(ctx, databricks.JobsCreateRequest{
+	res, _, err := client.JobApi.CreateJob(ctx, databricks.JobSettings{
 		Name:              "databricks-sdk-go job name",
 		ExistingClusterId: clusterId,
 	})
@@ -15,7 +15,7 @@ func CreateJob(clusterId string) databricks.JobsCreateResponse {
 	return res
 }
 
-func GetJob(jobId int64) databricks.JobsGetResponse {
+func GetJob(jobId int64) databricks.Job {
 	res, _, err := client.JobApi.GetJob(ctx, jobId)
 	if err != nil {
 		panic(err)

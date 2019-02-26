@@ -21,7 +21,7 @@ Creates a new job with the provided settings.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for logging, tracing, authentication, etc.
-  **body** | [**JobsCreateRequest**](JobsCreateRequest.md)|  | 
+  **body** | [**JobSettings**](JobSettings.md)|  | 
 
 ### Return type
 
@@ -67,7 +67,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetJob**
-> JobsGetResponse GetJob(ctx, jobId)
+> Job GetJob(ctx, jobId)
 
 
 Retrieves information about a single job.
@@ -81,7 +81,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**JobsGetResponse**](JobsGetResponse.md)
+[**Job**](Job.md)
 
 ### Authorization
 
