@@ -49,7 +49,7 @@ Edits the configuration of a cluster to match the provided attributes and size.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for logging, tracing, authentication, etc.
-  **body** | [**ClustersEditRequest**](ClustersEditRequest.md)|  | 
+  **body** | [**NewCluster**](NewCluster.md)|  | 
 
 ### Return type
 

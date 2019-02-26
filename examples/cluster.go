@@ -37,7 +37,7 @@ func GetCluster(clusterId string) databricks.ClustersGetResponse {
 func EditCluster(clusterId string) {
 	WaitClusterState(clusterId, databricks.RUNNING_ClustersClusterState)
 
-	_, err := client.ClusterApi.EditCluster(ctx, databricks.ClustersEditRequest{
+	_, err := client.ClusterApi.EditCluster(ctx, databricks.NewCluster{
 		ClusterId:    clusterId,
 		ClusterName:  ClusterName,
 		SparkVersion: SparkVersion,
