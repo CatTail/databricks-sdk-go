@@ -13,5 +13,5 @@ type NotebookTask struct {
 
 	NotebookPath string `json:"notebook_path"`
 
-	BaseParameters []ParamPair `json:"base_parameters,omitempty"`
+	BaseParameters []map[string]string `json:"base_parameters,omitempty"`
 }

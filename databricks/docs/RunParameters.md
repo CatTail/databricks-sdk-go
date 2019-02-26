@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **JarParams** | **[]string** |  | [optional] [default to null]
-**NotebookParams** | [**[]ParamPair**](ParamPair.md) |  | [optional] [default to null]
+**NotebookParams** | [**[]map[string]string**](map.md) |  | [optional] [default to null]
 **PythonParams** | **[]string** |  | [optional] [default to null]
 **SparkSubmitParams** | **[]string** |  | [optional] [default to null]
 
